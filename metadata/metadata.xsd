@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://skjema.kxml.no/metadata" targetNamespace="http://skjema.kxml.no/metadata" elementFormDefault="unqualified">
+  <!-- Annonserer uri til kodeliste som brukes for å hente mulige verdier til et felt. Kan normalt hentes på flere format med content negotiation (feks text/html, application/json, application/xml eller application/rdf+xml ) -->
+  <xsd:attribute name="codelist" type="xsd:string"/>
+  
+  <!-- Annonserer REST tjeneste som kan benyttes for utregning av felt -->
+  <xsd:attribute name="serviceCalculation" type="xsd:string"/>
+  
+   <!-- Annonserer uri til REST tjeneste for å validere data -->
+  <xsd:attribute name="serviceValidation" type="xsd:string"/>
+</xsd:schema>

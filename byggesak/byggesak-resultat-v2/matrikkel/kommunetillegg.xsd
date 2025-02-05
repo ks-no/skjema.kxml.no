@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kommunetilleggns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommunetillegg" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:matrikkelsokns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommunetillegg" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" />-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" />-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" schemaLocation="matrikkelsok.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: kommunetillegg  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AdresseReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AdresseReferanse">
+		<xs:annotation>
+			<xs:documentation>
+            Referanse på adressen til kommunale eller andre arkiv. Brukes også for å opplyse om spesielle
+            forhold på adressen. Referansen har en kode for referansetype og en tekst.
+            Kommunal tilleggsdel.
+         </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Referanse i arkivet eller annen informasjon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adresseReferanseKode" type="kommunetilleggns:AdresseReferanseKode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AdresseReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AdresseReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AdresseTillegg  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AdresseTillegg">
+		<xs:sequence>
+			<xs:element name="adresseIdent" type="adressens:AdresseIdent"/>
+			<xs:element name="kartblad" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hvilket kartblad adressens koordinat ligger på</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adresseReferanse" type="kommunetilleggns:AdresseReferanse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="kommentar" type="kommunetilleggns:Kommentar" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BygningReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BygningReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BygningTillegg  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BygningTillegg">
+		<xs:sequence>
+			<xs:element name="byggIdent" type="bygningns:ByggIdent"/>
+			<xs:element name="alternativtArealBygning" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Alternativt areal bygning oppgis i hele kvadratmeter summert for hele bygget. Feltet
+                  var opprinnelig tenkt brukt til å angi bebygd areal. Nå stilles kommunen fritt til å legge inn det
+                  areal som den ønsker, f.eks. areal for beregning av kommunale avgifter (f.eks.
+                  leieareal).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antallEtasjer" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Hvor mange etasjer bygget har. Kan være 0.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="antallRoklop" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Hvor mange røkløp bygningen har.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="brenseltankNedgravd" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Årstall med 4 sifre for nedgraving av brenseltank.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="septiktank" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Om bygningen har septiktank.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kartblad" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hvilket kartblad bygningens koordinat ligger på.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kildePrivatVannforsyningKode" type="kommunetilleggns:KildePrivatVannforsyningKode">
+				<xs:annotation>
+					<xs:documentation>Kode for hva som er vannkilde dersom bygget ikke er tilknyttet offentlig eller privat
+                  vannverk.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="privatKloakkRensingsKode" type="kommunetilleggns:PrivatKloakkRensingsKode">
+				<xs:annotation>
+					<xs:documentation>Kode for rensing av kloakk dersom kloakken er privat.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="renovasjonsKode" type="kommunetilleggns:RenovasjonsKode">
+				<xs:annotation>
+					<xs:documentation>Kode for hvilken type renovasjon bygget er tilknyttet.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fundamenteringsKode" type="kommunetilleggns:FundamenteringsKode">
+				<xs:annotation>
+					<xs:documentation>Kode for type byggemateriale i byggets fundament. Fundamentering er den delen av bygget
+                  som overfører virkende krefter direkte til grunnen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="materialeIYtterveggKode" type="kommunetilleggns:MaterialeIYtterveggKode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>De materialtyper som utgjør mer enn en fjerdepart av konstruksjonene i
+                  yttervegger.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="horisontalBarekonstrKode" type="kommunetilleggns:HorisontalBarekonstrKode" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kode for de materialtyper som utgjør mer enn en fjerdepart av de vertikale
+                  bærekonstruksjonene. Vertikale bærekonstruksjoner er bærende deler i vegger o.l., f.eks
+                  reisverket.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bygningsReferanse" type="kommunetilleggns:BygningsReferanse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="kommentar" type="kommunetilleggns:Kommentar" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="vertikalBarekonstrKode" type="kommunetilleggns:VertikalBarekonstrKode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BygningsReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BygningsReferanse">
+		<xs:annotation>
+			<xs:documentation>Referanse til arkiver hvor bygningen behandles. Kan også være viktige datoer eller egenskaper
+            til bygget. Referansen har en kode for referansetype og en tekst.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Referanse til kommunalt arkiv, datoer uten egne felt og visse typer kodet informasjon.
+                  Feltet har spesiell utfylling for visse referansetyper.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bygningsReferanseKode" type="kommunetilleggns:BygningReferanseKode">
+				<xs:annotation>
+					<xs:documentation>Kode for type referanse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EtatsKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EtatsKode">
+		<xs:annotation>
+			<xs:documentation>Kode for etat som har lagt inn den kommenter</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FundamenteringsKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FundamenteringsKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VegReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VegReferanse">
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Referanse i arkivet eller annen informasjon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vegReferanseKode" type="kommunetilleggns:VegReferanseKode">
+				<xs:annotation>
+					<xs:documentation>Kode for type referanse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VegReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VegReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Vegtillegg  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VegTillegg">
+		<xs:sequence>
+			<xs:element name="vegIdent" type="adressens:VegIdent"/>
+			<xs:element name="vegReferanse" type="kommunetilleggns:VegReferanse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="kommentar" type="kommunetilleggns:Kommentar" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HorisontalBarekonstrKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="HorisontalBarekonstrKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KildePrivatVannforsyningKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KildePrivatVannforsyningKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Kommentar  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Kommentar">
+		<xs:annotation>
+			<xs:documentation>Kommentarer knyttet til bygning, adresse, matrikkelenhet, veg, krets eller område.
+            Kommentarene har en kode for kommentartype samt en tekst, saksnr og etatskode.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dato" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Dato for innlagt kommentar</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tekst" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Kommentartekst</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="saksnr" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Saksnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kommentarTypeKode" type="kommunetilleggns:KommentarTypeKode"/>
+			<xs:element name="etatsKode" type="kommunetilleggns:EtatsKode">
+				<xs:annotation>
+					<xs:documentation>Kode for etat som har lagt inn kommenteren</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KommentarTypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KommentarTypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MaterialeIYtterveggKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MaterialeIYtterveggKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelenhetReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelenhetReferanse">
+		<xs:annotation>
+			<xs:documentation>Referanse på matrikkelenheten til kommunale eller andre arkiv. Brukes også for å opplyse om
+            spesielle forhold på endommen. Referansen har en kode for referansetype og en tekst.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string"/>
+			<xs:element name="matrikkelenhetReferanseKode" type="kommunetilleggns:MatrikkelenhetReferanseKode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelenhetReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelenhetReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelenhetTillegg  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelenhetTillegg">
+		<xs:sequence>
+			<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+			<xs:element name="kartblad" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="kommentar" type="kommunetilleggns:Kommentar" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="brukAvGrunnKode" type="kommunetilleggns:BrukAvGrunnKode">
+				<xs:annotation>
+					<xs:documentation>Kode for matrikkelenhetens bruk av grunn.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matrikkelenhetReferanse" type="kommunetilleggns:MatrikkelenhetReferanse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="undereiendomIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PrivatKloakkRensingsKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PrivatKloakkRensingsKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: RenovasjonsKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="RenovasjonsKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VertikalBarekonstrKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VertikalBarekonstrKode">
+		<xs:annotation>
+			<xs:documentation>Kode for de materialtyper som utgjør mer enn en fjerdepart av de vertikale
+            bærekonstruksjonene. Vertikale bærekonstruksjoner er bærende deler i vegger o.l., f.eks
+            reisverket.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BrukAvGrunnKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BrukAvGrunnKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KretsTillegg  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KretsTillegg">
+		<xs:sequence>
+			<xs:element name="kretsReferanse" type="kommunetilleggns:KretsReferanse" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="kommentar" type="kommunetilleggns:Kommentar" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KretsReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KretsReferanse">
+		<xs:annotation>
+			<xs:documentation>
+            Referanse på kretsn til kommunale eller andre arkiv. Brukes også for å opplyse om spesielle
+            forhold på kretsn. Referansen har en kode for referansetype og en tekst.
+            Kommunal tilleggsdel.
+         </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Referanse i arkivet eller annen informasjon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kretsReferanseKode" type="kommunetilleggns:KretsReferanseKode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KretsReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KretsReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Referanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Referanse">
+		<xs:annotation>
+			<xs:documentation>Referanse på matrikkelenheten, teigen, teiggrensen eller grensepunktet til kommunale eller
+            andre arkiv. Brukes også for å opplyse om spesielle forhold på eiendommen. Referansen har en kode for
+            referansetype og en tekst.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="referanse" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Referanse i arkivet eller annen informasjon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="matrikkelenhetReferanseKode" type="kommunetilleggns:MatrikkelenhetReferanseKode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenhetTilleggForIdentRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenhetTilleggForIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenhetTilleggForIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenhetTilleggForIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetTillegg" type="kommunetilleggns:MatrikkelenhetTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenhetTilleggRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenhetTilleggRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenhetTilleggResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenhetTilleggResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetTillegg" type="kommunetilleggns:MatrikkelenhetTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningTilleggForIdentRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningTilleggForIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="byggIdent" type="bygningns:ByggIdent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningTilleggForIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningTilleggForIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningTillegg" type="kommunetilleggns:BygningTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningTilleggRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningTilleggRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningTilleggResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningTilleggResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningTillegg" type="kommunetilleggns:BygningTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresseTilleggForIdentRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresseTilleggForIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adresseIdent" type="adressens:AdresseIdent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresseTilleggForIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresseTilleggForIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adresseTillegg" type="kommunetilleggns:AdresseTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresseTilleggRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresseTilleggRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adressesokModel" type="matrikkelsokns:AdressesokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresseTilleggResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresseTilleggResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adresseTillegg" type="kommunetilleggns:AdresseTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindVegTilleggForIdentRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindVegTilleggForIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="vegIdent" type="adressens:VegIdent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindVegTilleggForIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindVegTilleggForIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="vegTillegg" type="kommunetilleggns:VegTillegg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

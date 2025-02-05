@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Preutfyll-person" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" xmlns:ovp="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+  <!--Generert av Metakat wsdl generator(0.8.0.0) - 25.07.2012 15:11:33-->
+  <wsdl:types>
+    <xs:schema targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" xmlns:ovp="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:ov="http://skjema.kxml.no/oppvekst">
+      <xs:include schemaLocation="preutfyll-person-v2.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31/giFellesKontakt20120131.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/oppvekst" schemaLocation="http://skjema.kxml.no/oppvekst/oppvekst-v2.xsd" />
+      <xs:element name="FinnFamilierForPerson">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="foedselsnummer" type="felleskontaktns:PersonidentifikatorType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FinnFamilierForPersonResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="ovp:PreutfyllresultatType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SystemFaultMessage">
+    <wsdl:part name="fault" element="fellestekniskns:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="FinnFamilierForPersonMessage">
+    <wsdl:part name="parameters" element="ovp:FinnFamilierForPerson" />
+  </wsdl:message>
+  <wsdl:message name="FinnFamilierForPersonResponseMessage">
+    <wsdl:part name="parameters" element="ovp:FinnFamilierForPersonResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Preutfyll-personPort">
+    <wsdl:operation name="FinnFamilierForPerson">
+      <wsdl:input name="FinnFamilierForPersonRequest" message="ovp:FinnFamilierForPersonMessage" />
+      <wsdl:output name="FinnFamilierForPersonResponse" message="ovp:FinnFamilierForPersonResponseMessage" />
+      <wsdl:fault name="SystemFault" message="ovp:SystemFaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Preutfyll-personSoap" type="ovp:Preutfyll-personPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FinnFamilierForPerson">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2/#FinnFamilierForPerson" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Preutfyll-person">
+    <wsdl:port name="Preutfyll-person" binding="ovp:Preutfyll-personSoap">
+      <soap:address location="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

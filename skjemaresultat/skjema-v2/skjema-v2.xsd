@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2" elementFormDefault="qualified" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:19:52-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31/giArkivFelles20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31/giArkivKjerne20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31/giArkivDokument20120131.xsd" />
+  <xs:element name="Arkivdata" type="skj:ArkivdataType" />
+  <xs:complexType name="ArkivdataListe">
+    <xs:sequence>
+      <xs:element name="arkivdata" type="skj:ArkivdataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArkivdataType">
+    <xs:annotation>
+      <xs:documentation>et arkiv består av brev eller dokumenter som er blitt til som ledd i en bedrifts eller et (offentlig) organs virksomhet samt metadata om disse.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="saksmappe" minOccurs="0" maxOccurs="1" type="arkivkjernens:Saksmappe" />
+      <xs:element name="journalpost" minOccurs="1" maxOccurs="1" type="arkivkjernens:Journalpost" />
+      <xs:element name="dokumenter" minOccurs="0" maxOccurs="1" type="arkivdokumentns:DokumentListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbstraktFagdata" type="skj:AbstraktFagdataType" />
+  <xs:complexType name="AbstraktFagdataListe">
+    <xs:sequence>
+      <xs:element name="abstraktfagdata" type="skj:AbstraktFagdataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AbstraktFagdataType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Fagdataimplementasjoner arver fra denne slik som feks barnehage, sfo, skole innrapportering, byggesak, stedsbasert innrapportering, mm</xs:documentation>
+    </xs:annotation>
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="RelasjonstypeKode" type="skj:RelasjonstypeKodeType" />
+  <xs:complexType name="RelasjonstypeKodeListe">
+    <xs:sequence>
+      <xs:element name="relasjonstypekode" type="skj:RelasjonstypeKodeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RelasjonstypeKodeType">
+    <xs:annotation>
+      <xs:documentation>Angir type relasjon til annen søknad
+
+Se kodeliste på http://www.kxml.no/Kodeliste/502eb6ed-54c5-4236-b42d-73148c1fcbc4
+
+Kompletterer kan kuttes ved at vi da forlanger komplett søknad på nytt = Erstatter. Relatert kan brukes ved f.eks. søknad om midlertidig brukstillatelse i byggesak og relaterer da til tidligere søknad om igangsettingstillatelse.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RelatertSoeknad" type="skj:RelatertSoeknadType" />
+  <xs:complexType name="RelatertSoeknadListe">
+    <xs:sequence>
+      <xs:element name="relatertsoeknad" type="skj:RelatertSoeknadType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RelatertSoeknadType">
+    <xs:annotation>
+      <xs:documentation>Referanse til annen instans av skjema.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="soeknadsid" minOccurs="1" maxOccurs="1" type="skj:SoeknadsIdType" />
+      <xs:element name="relasjonstype" minOccurs="1" maxOccurs="1" type="skj:RelasjonstypeKodeType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attributeGroup name="SkjemahodeType">
+    <xs:attribute name="skjemaId" type="xs:string" use="required" />
+    <xs:attribute name="skjemaversjon" type="xs:string" use="required" />
+    <xs:attribute name="resultatkilde" type="xs:string" use="required" />
+    <xs:attribute name="resultatsystem" type="xs:string" use="required" />
+    <xs:attribute name="resultatDato" type="xs:dateTime" use="required" />
+    <xs:attribute name="resultatmaal" type="xs:string" use="required" />
+    <xs:attribute name="spraak" type="xs:string" use="required" />
+  </xs:attributeGroup>
+  <xs:element name="Skjemakvittering" type="skj:SkjemakvitteringType" />
+  <xs:complexType name="SkjemakvitteringListe">
+    <xs:sequence>
+      <xs:element name="skjemakvittering" type="skj:SkjemakvitteringType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkjemakvitteringType">
+    <xs:annotation>
+      <xs:documentation>Kvittering for at søknaden er lastet ned fra skjemaløsningen til skjema/postmottak for videre saksbehandling i organisasjonen</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="soeknadsid" minOccurs="1" maxOccurs="1" type="skj:SoeknadsIdType" />
+      <xs:element name="saksnummer" minOccurs="0" maxOccurs="1" type="arkivfellesns:Saksnummer" />
+      <xs:element name="journalnummer" minOccurs="0" maxOccurs="1" type="arkivkjernens:Journalnummer" />
+      <xs:element name="kvitteringErSendtSoeker" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Skjemaresultat" type="skj:SkjemaresultatType" />
+  <xs:complexType name="SkjemaresultatListe">
+    <xs:sequence>
+      <xs:element name="skjemaresultat" type="skj:SkjemaresultatType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkjemaresultatType">
+    <xs:annotation>
+      <xs:documentation>Samlingen med informasjon som utgjør søknaden.
+Informasjonen er delt i tre elementer; ett for fagsystemdata, som skal benyttes av fagsystem for å registrere og behandle søknaden, og ett for arkivdata, samt ett for hodedata og identifikasjon.
+Arkivdata kan benyttes i integrasjoner uten fagsystem, og hvor mellomvare er involvert i ruting og arkivering av informasjonen. Arkivdata seksjonen benyttes også for å transportere filvedlegg slik som f.eks PDF versjoner av den utfylte søknaden.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="soeknadsid" minOccurs="1" maxOccurs="1" type="skj:SoeknadsIdType" />
+      <xs:element name="relatertsoeknad" minOccurs="0" maxOccurs="1" type="skj:RelatertSoeknadType" />
+      <xs:element name="arkivdata" minOccurs="0" maxOccurs="1" type="skj:ArkivdataType" />
+      <xs:element name="fagsystemdata" minOccurs="0" maxOccurs="1" type="skj:AbstraktFagdataType" />
+    </xs:sequence>
+    <xs:attributeGroup ref="skj:SkjemahodeType" />
+  </xs:complexType>
+  <xs:element name="SoeknadsId" type="skj:SoeknadsIdType" />
+  <xs:complexType name="SoeknadsIdListe">
+    <xs:sequence>
+      <xs:element name="soeknadsid" type="skj:SoeknadsIdType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SoeknadsIdType">
+    <xs:annotation>
+      <xs:documentation>Identifikator for resultatet. Dette skal være en unik identifikator for
+resultatet, og det anbefales å benytte en GUID </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="identifikator" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

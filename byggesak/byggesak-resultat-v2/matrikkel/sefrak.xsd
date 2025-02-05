@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kommunens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sefrakns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" schemaLocation="kommune.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: sefrak  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="kommunenr" type="xs:int"/>
+					<xs:element name="registreringskretsnr" type="xs:int"/>
+					<xs:element name="huslopenr" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakMinne  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakMinne">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="sefrakIdent" type="sefrakns:SefrakIdent">
+						<xs:annotation>
+							<xs:documentation>Sefrak minnets ident</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="kommunenr" type="xs:int"/>
+					<xs:element name="objektnummerRubrikk" type="sefrakns:ObjektnummerRubrikk">
+						<xs:annotation>
+							<xs:documentation>Sefrakminnets objektnummer, består av henvisning til kommune, registreringskretsnr og husløpenr.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="objektnavnRubrikk" type="sefrakns:NavnRubrikk">
+						<xs:annotation>
+							<xs:documentation>Navn på objektet. Identifiserende navn som er brukt i sefrak-arkivet. Rubrikk nr 45 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lokaltnavnRubrikk" type="sefrakns:NavnRubrikk">
+						<xs:annotation>
+							<xs:documentation>Lokalt navn på kulturminnet. Rubrikk nr 48 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="verdivurderingRubrikk" type="sefrakns:VerdivurderingRubrikk">
+						<xs:annotation>
+							<xs:documentation>Kode for vurdering av sefrakobjektets verdi. Rubrikk nr 61 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="etasjetallRubrikk" type="sefrakns:EtasjetallRubrikk">
+						<xs:annotation>
+							<xs:documentation>Kode for sefrakobjektets antall etasjer. Rubrikk nr 21 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hovedmalRubrikk" type="sefrakns:HovedmalRubrikk">
+						<xs:annotation>
+							<xs:documentation>Lengden på huset, angitt i cm. Bredden på huset, angitt i cm. Rubrikk nr 24 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="antallSkorsteinerRubrikk" type="sefrakns:AntallSkorsteinerRubrikk">
+						<xs:annotation>
+							<xs:documentation>Sefrakminnets antall skorsteiner. Rubrikk nr 25 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="opprinneligFunksjonRubrikk" type="sefrakns:FunksjonRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for opprinnelige funksjoner. Rubrikk nr 12 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="navarendeFunksjonRubrikk" type="sefrakns:FunksjonRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for nåværende funksjoner. Rubrikk nr 13 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="opprinneligSosialtMiljoRubrikk" type="sefrakns:OpprinneligSosialtMiljoRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for opprinnelig sosialt miljø. Rubrikk nr 14 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="forholdAndreHusRubrikk" type="sefrakns:ForholdAndreHusRubrikk">
+						<xs:annotation>
+							<xs:documentation>Kode for sefrakobjektets forhold til andre hus. Rubrikk nr 15 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fysiskMiljoRubrikk" type="sefrakns:FysiskMiljoRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for fysisk miljø. Rubrikk nr 16 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="underbygningKonstrRubrikk" type="sefrakns:UnderbygningKonstrRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for konstruksjon av underbygningen. Rubrikk nr 17 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="kjellerRubrikk" type="sefrakns:KjellerRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for utnyttelse av kjeller. Rubrikk nr 18 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ytterveggRubrikk" type="sefrakns:YtterveggRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for konstruksjon av yttervegg. Rubrikk nr 19 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fasadeRubrikk" type="sefrakns:FasadeRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for fasadekledning. Rubrikk nr 20 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="takformRubrikk" type="sefrakns:TakformRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for takformRubrikk. Rubrikk nr 21 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="taktekkingRubrikk" type="sefrakns:TaktekkingRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets koder for taktekkingRubrikk. Rubrikk nr 22 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="byggeTidRubrikk" type="sefrakns:TidRubrikk">
+						<xs:annotation>
+							<xs:documentation>Tidskode for sefrakobjektets byggeår, innen kvart århundre. Rubrikk nr 28 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tilbyggingsTiderRubrikk" type="sefrakns:TiderRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets tidskoder for tilbygg. Rubrikk nr 29 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="flyttingTiderRubrikk" type="sefrakns:TiderRubrikk">
+						<xs:annotation>
+							<xs:documentation>Liste med sefrakobjektets tidskoder for flytting. Rubrikk nr 30 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="revetBrentTidRubrikk" type="sefrakns:TidRubrikk">
+						<xs:annotation>
+							<xs:documentation>Tidskode for når sefrakobjektets eventuelt ble revet/brent eller falt i ruin, innen kvart århundre. Rubrikk nr 31 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="vernevedtakRubrikk" type="sefrakns:VernevedtakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Kode for eventuell fredning av sefrakminnet. Rubrikk nr 35 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fredningRubrikk" type="sefrakns:FredningRubrikk">
+						<xs:annotation>
+							<xs:documentation>Kode for eventuell fredning av sefrakminnet. Rubrikk nr 35 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="miljoOvervakingRubrikk" type="sefrakns:MiljoOvervakingRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for miljøovervåking for sefrakobjektet. Inneholder liste med dato og kode for endringsgrad</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="feltregistrertRubrikk" type="sefrakns:RegistrertRubrikk">
+						<xs:annotation>
+							<xs:documentation>Av hvem og når feltregistrering og eventuelle ajourføringer ble utført. Rubrikk nr 49 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="andreKilderRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for andre kilder til opplysninger om sefrakminnet. Rubrikk nr 37 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fotoTegningRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for eldre foto/tegninger om sefrakminnet. Rubrikk nr 38 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="inskripsjonerRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for innskrifter og dekor knyttet til sefrakminnet. Rubrikk nr 40 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="byggherreRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for sefrakminnets byggherre. Rubrikk nr 41 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="byggmesterArkitektRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for sefrakminnets byggmester eller arkitekt. Rubrikk nr 42 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="andreOpplysningerRubrikk" type="sefrakns:SefrakRubrikk">
+						<xs:annotation>
+							<xs:documentation>Rubrikk for andre opplysninger om sefrakminnet. Rubrikk nr 43 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bygningerRubrikk" type="sefrakns:BygningerRubrikk">
+						<xs:annotation>
+							<xs:documentation>Sett med sefrakobjektets henvisninger til bygg. Et sefrakobjekt har som regel
+                        bare knytning til en bygning, men kan ha knytning til flere bygninger. Hovedregelen er at
+                        sefrakobjekt skal knyttes til bygning, men det finnes knytning til tilbygg. Settet kan være tomt.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="fotohenvisningerRubrikk" type="sefrakns:FotohenvisningerRubrikk">
+						<xs:annotation>
+							<xs:documentation>Sett med sefrakobjektets henvisninger til fotohenvisninger i Riksantikvarens filmregister.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sefrakReferanserRubrikk" type="sefrakns:SefrakReferanserRubrikk">
+						<xs:annotation>
+							<xs:documentation>Sett med sefrakobjektets referanser. Settet kan være tomt.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ObjektnummerRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ObjektnummerRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="registreringskommunenr" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Id til kommune som sefrakobjektet er registrert i.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="registreringskretsnr" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Registreringskretsnr er Riksantikvarens oppdeling av kommunen. Tilsvarer gamle kirkekretser.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="huslopenr" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Løpenr innen registreringskretsen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VerdivurderingRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VerdivurderingRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="verdivurderingKode" type="sefrakns:VerdivurderingKode">
+						<xs:annotation>
+							<xs:documentation>Kode for vurdering av sefrakobjektets verdi.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EtasjetallRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EtasjetallRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="etasjetallKode" type="sefrakns:EtasjetallKode">
+						<xs:annotation>
+							<xs:documentation>Kode for sefrakobjektets antall etasjer. Rubrikk nr 23 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HovedmalRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="HovedmalRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="lengde" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Lengden på huset, angitt i cm. Rubrikk nr 24 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bredde" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Bredden på huset, angitt i cm. Rubrikk nr 24 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AntallSkorsteinerRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AntallSkorsteinerRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="antallSkorsteiner" type="xs:int">
+						<xs:annotation>
+							<xs:documentation>Sefrakminnets antall skorsteiner. Er ikke det samme som antall røykløp lagret på bygning (det kan være flere røykløp innen en skorstein).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FunksjonRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FunksjonRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: OpprinneligSosialtMiljoRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="OpprinneligSosialtMiljoRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ForholdAndreHusRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ForholdAndreHusRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="forholdAndreHusKode" type="sefrakns:ForholdAndreHusKode">
+						<xs:annotation>
+							<xs:documentation>Kode for sefrakobjektets forhold til andre hus. Rubrikk nr 15 i sefrak-skjemaet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FysiskMiljoRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FysiskMiljoRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: UnderbygningKonstrRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="UnderbygningKonstrRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KjellerRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KjellerRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: YtterveggRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="YtterveggRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FasadeRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FasadeRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TakformRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TakformRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TaktekkingRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TaktekkingRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TidRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TidRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="tidskode" type="sefrakns:TidsKode">
+						<xs:annotation>
+							<xs:documentation>Kode for tidfesting.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TiderRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TiderRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodelisteRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VernevedtakRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VernevedtakRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="vernevedtakKode" type="sefrakns:VernevedtakKode">
+						<xs:annotation>
+							<xs:documentation>Kode for tidfesting.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FredningRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FredningRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakKodeRubrikk">
+				<xs:sequence>
+					<xs:element name="fredningKode" type="sefrakns:FredningKode">
+						<xs:annotation>
+							<xs:documentation>Kode for tidfesting.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MiljoOvervakingRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MiljoOvervakingRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="endringsvurderinger" type="sefrakns:Endringsvurdering" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Set med ajourføringer av registreringen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Endringsvurdering  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Endringsvurdering">
+		<xs:sequence>
+			<xs:element name="endringsgradKode" type="sefrakns:EndringsgradKode">
+				<xs:annotation>
+					<xs:documentation>Kode for endringsgrad.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vurdertDato" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dato for endringsvurderingen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: RegistrertRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="RegistrertRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="feltregistrertAv" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Initialer for hvem som utførte feltregistrering av sefrakobjektet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="feltregistrertDato" type="xs:date" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Dato for når feltregistrering av sefrakobjektet ble utført.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ajourforinger" type="sefrakns:Ajourforing" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Set med ajourføringer av registreringen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Ajourforing  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Ajourforing">
+		<xs:sequence>
+			<xs:element name="ajourfortDato" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Når ajourføringen ble utført.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ajourfortAv" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hvem ajourføringen ble utført av. Inneholder initialer eller navn.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BygningerRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BygningerRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="bygningerIds" type="bygningns:ByggIdent" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Set med ajourføringer av registreringen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FotohenvisningerRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FotohenvisningerRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="fotohenvisninger" type="sefrakns:Fotohenvisning" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Sett med henvisning til filmnr, fra- og til bildenr.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Fotohenvisning  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Fotohenvisning">
+		<xs:sequence>
+			<xs:element name="filmnr" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Filmnr i filmarkiv i tilknytning til SEFRAK.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bildenrFra" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Laveste bildenr på filmen som er av sefrakminnet.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bildenrTil" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Høyeste bildenr på filmen som er av sefrakminnet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakReferanserRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakReferanserRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="sefrakReferanser" type="sefrakns:SefrakReferanse" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Set med ajourføringer av registreringen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakReferanse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakReferanse">
+		<xs:sequence>
+			<xs:element name="sefrakReferanseKode" type="sefrakns:SefrakReferanseKode">
+				<xs:annotation>
+					<xs:documentation>Kode for type referanse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referanse" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Referanse til annet minne eller annen informasjon.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: NavnRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="NavnRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="navn" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifiserende navn på sefrakminnet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakRubrikk">
+		<xs:sequence>
+			<xs:element name="merknad" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Merknad knyttet til rubrikken..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="usikker" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Flagg som sier om opplysningene for rubrikken er usikre.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakKodeRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakKodeRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakKodelisteRubrikk  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakKodelisteRubrikk">
+		<xs:complexContent>
+			<xs:extension base="sefrakns:SefrakRubrikk">
+				<xs:sequence>
+					<xs:element name="kodeliste" type="fellesns:Kode" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VerdivurderingKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VerdivurderingKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EtasjetallKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EtasjetallKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ForholdAndreHusKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ForholdAndreHusKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FunksjonKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FunksjonKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: OpprinneligSosialtMiljoKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="OpprinneligSosialtMiljoKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FysiskMiljoKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FysiskMiljoKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: UnderbygningKonstrKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="UnderbygningKonstrKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KjellerKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KjellerKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: YtterveggKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="YtterveggKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FasadeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FasadeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TakformKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TakformKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TaktekkingKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TaktekkingKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TidsKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TidsKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VernevedtakKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VernevedtakKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FredningKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FredningKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakReferanseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakReferanseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EndringsgradKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EndringsgradKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefrakIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefrakIntervallIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="kommune" type="kommunens:KommuneIdent"/>
+					<xs:element name="registreringskretsnr" type="xs:string" minOccurs="0"/>
+					<xs:element name="huslopenr" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SefraksokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SefraksokModel">
+		<xs:sequence>
+			<xs:element name="sefrakIdent" type="sefrakns:SefrakIntervallIdent"/>
+			<xs:element name="byggIdent" type="bygningns:BygningsIntervallIdent"/>
+			<xs:element name="aktivKommunenr" type="xs:string"/>
+			<xs:element name="helKommune" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="selectionPolygon" type="fellesns:SelectionPolygon" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSefrakMinnerForBygningRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSefrakMinnerForBygningRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="byggIdent" type="bygningns:ByggIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSefrakMinnerForBygningResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSefrakMinnerForBygningResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sefrakMinner" type="sefrakns:SefrakMinne" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

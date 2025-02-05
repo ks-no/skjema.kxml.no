@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://w3.brreg.no/seres/ks/skjemaresultat/felles/arkiv-v01" xmlns:n4ws="http://www.arkivverket.no/Noark4-1-WS-WD/types" targetNamespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/arkiv-v01" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.arkivverket.no/Noark4-1-WS-WD/types" schemaLocation="noark4_1_ws_wd_types.xsd"/>
+
+	<xsd:complexType name="ArkivdataType">
+		<xsd:sequence>
+			<xsd:element name="noarksak" type="n4ws:NoarksakType" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="journpost" type="n4ws:JournpostType" sawsdl:modelReference="http://www.arkivverket.no/Noark4WS/types/noark4ws-types.xsd#xpointer(name('EksternNokkelType'))" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>TODO: bruke SAWSDL annotasjoner mot NOARK4 dokumentasjon</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

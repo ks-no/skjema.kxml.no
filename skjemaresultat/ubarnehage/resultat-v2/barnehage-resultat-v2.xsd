@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/resultat-v2" xmlns:bres="http://skjema.kxml.no/skjemaresultat/barnehage/resultat-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" elementFormDefault="qualified" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" xmlns:bgr="http://skjema.kxml.no/felles/borger" xmlns:ov="http://skjema.kxml.no/oppvekst">
+  <!-- Generert av Arkitektum xsd generator(0.8.0.0) - 10.07.2012 15:56:23-->
+  <xs:import namespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" schemaLocation="http://skjema.kxml.no/skjemaresultat/skjema-v2/skjema-v2.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31/giFellesKontakt20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/borger" schemaLocation="http://skjema.kxml.no/felles/borger/borger-v2.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/oppvekst" schemaLocation="http://skjema.kxml.no/oppvekst/oppvekst-v2.xsd" />
+  <xs:element name="Barnehagefagdata" type="bres:BarnehagefagdataType" />
+  <xs:complexType name="BarnehagefagdataListe">
+    <xs:sequence>
+      <xs:element name="barnehagefagdata" type="bres:BarnehagefagdataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BarnehagefagdataType">
+    <xs:complexContent>
+      <xs:extension base="skj:AbstraktFagdataType">
+        <xs:sequence>
+          <xs:element name="soeknadsopplysninger" minOccurs="1" maxOccurs="1" type="bres:SoeknadsopplysningerType" />
+          <xs:element name="plassvalg" minOccurs="0" maxOccurs="1" type="ov:PlassListe" />
+          <xs:element name="barnopplysninger" minOccurs="1" maxOccurs="1" type="ov:BarnType" />
+          <xs:element name="barnflytteopplysninger" minOccurs="1" maxOccurs="1" type="bres:BarnFlytteOpplysningerType" />
+          <xs:element name="regningsmottaker" minOccurs="1" maxOccurs="1" type="felleskontaktns:Kontakt" />
+          <xs:element name="tilleggsdata" minOccurs="0" maxOccurs="1" type="bres:AbstraktTilleggsdataType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BarnFlytteOpplysninger" type="bres:BarnFlytteOpplysningerType" />
+  <xs:complexType name="BarnFlytteOpplysningerListe">
+    <xs:sequence>
+      <xs:element name="barnflytteopplysninger" type="bres:BarnFlytteOpplysningerType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BarnFlytteOpplysningerType">
+    <xs:annotation>
+      <xs:documentation>Opplysninger som benyttes hvis barnet/søker skal flytte til kommunen.
+Hvis innflytting (til kommune) er satt (true), er nyadresse (m/fomDato) påkrevet (ellers ikke)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="nyadresse" minOccurs="0" maxOccurs="1" type="bgr:AdresseperiodeType" />
+    </xs:sequence>
+    <xs:attribute name="innflytting" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="MeldingstypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OVERFOERING_SAMME_KOMMUNE" />
+      <xs:enumeration value="NY_PLASS" />
+      <xs:enumeration value="OPPSIGELSE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MeldingstypeListe">
+    <xs:sequence>
+      <xs:element name="meldingstype" type="bres:MeldingstypeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Soeknadsopplysninger" type="bres:SoeknadsopplysningerType" />
+  <xs:complexType name="SoeknadsopplysningerListe">
+    <xs:sequence>
+      <xs:element name="soeknadsopplysninger" type="bres:SoeknadsopplysningerType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SoeknadsopplysningerType">
+    <xs:annotation>
+      <xs:documentation>Generelle opplysninger om søknaden</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="type" minOccurs="1" maxOccurs="1" type="bres:MeldingstypeType" />
+      <xs:element name="startdato" minOccurs="0" maxOccurs="1" type="xs:date" />
+      <xs:element name="vedlegg" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+      <xs:element name="sluttdato" minOccurs="0" maxOccurs="1" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbstraktTilleggsdata" type="bres:AbstraktTilleggsdataType" />
+  <xs:complexType name="AbstraktTilleggsdataListe">
+    <xs:sequence>
+      <xs:element name="abstrakttilleggsdata" type="bres:AbstraktTilleggsdataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AbstraktTilleggsdataType" abstract="true">
+    <xs:sequence />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kommunens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:matrikkelsokns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:rapportns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rapport" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sefrakns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rapport" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" schemaLocation="matrikkelsok.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" schemaLocation="sefrak.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" schemaLocation="kommune.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: rapport  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelRapport  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelRapport">
+		<xs:sequence>
+			<xs:element name="rapportType" type="xs:string"/>
+			<xs:element name="url" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbIdent-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="JobbIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbStatusKode-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="JobbStatusKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbTypeKode-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="JobbTypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Jobb-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Jobb">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="jobbId" type="rapportns:JobbIdent"/>
+					<xs:element name="brukerId" type="fellesns:BrukerIdent"/>
+					<xs:element name="jobbTypeKode" type="rapportns:JobbTypeKode"/>
+					<xs:element name="konavn" type="xs:string"/>
+					<xs:element name="beskrivelse" type="xs:string"/>
+					<xs:element name="opprettet" type="xs:date"/>
+					<xs:element name="status" type="rapportns:JobbStatusKode"/>
+					<xs:element name="feilmelding" type="xs:string"/>
+					<xs:element name="sistEndret" type="xs:date"/>
+					<xs:element name="prosessnavn" type="xs:string"/>
+					<xs:element name="servernavn" type="xs:string"/>
+					<xs:element name="nummerIKo" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: RapportStatusKode-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="RapportStatusKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateAdresseEnkelRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateAdresseEnkelRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adressesokModel" type="matrikkelsokns:AdressesokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateAdresseSosiRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateAdresseSosiRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adressesokModel" type="matrikkelsokns:AdressesokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateAdresseMassivRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateAdresseMassivRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adressesokModel" type="matrikkelsokns:AdressesokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateBygningTotalRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateBygningTotalRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="bygningstyper" type="xs:string"/>
+				<xs:element name="hjemmelshavere" type="xs:boolean"/>
+				<xs:element name="tiltakshavere" type="xs:boolean"/>
+				<xs:element name="kontaktpersoner" type="xs:boolean"/>
+				<xs:element name="bruksenheter" type="xs:boolean"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateBygningRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateBygningMassivRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="bygningstyper" type="xs:string"/>
+				<xs:element name="hjemmelshavere" type="xs:boolean"/>
+				<xs:element name="tiltakshavere" type="xs:boolean"/>
+				<xs:element name="kontaktpersoner" type="xs:boolean"/>
+				<xs:element name="bruksenheter" type="xs:boolean"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateSingleBygningRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateSingleBygningMassivRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:SingleBygningsokModel"/>
+				<xs:element name="bygningstyper" type="xs:string"/>
+				<xs:element name="hjemmelshavere" type="xs:boolean"/>
+				<xs:element name="tiltakshavere" type="xs:boolean"/>
+				<xs:element name="kontaktpersoner" type="xs:boolean"/>
+				<xs:element name="bruksenheter" type="xs:boolean"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateBygningRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateBygningSosiRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="bygningstyper" type="xs:string"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateBygningFKBRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateBygningFKBRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="bygningstyper" type="xs:string"/>
+				<xs:element name="hjemmelshavere" type="xs:boolean"/>
+				<xs:element name="tiltakshavere" type="xs:boolean"/>
+				<xs:element name="kontaktpersoner" type="xs:boolean"/>
+				<xs:element name="bruksenheter" type="xs:boolean"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelenhetEnkelRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelenhetEnkelRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelenhetMassivRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelenhetMassivRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateIkkeFullfortMatrikkelenhetRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateIkkeFullfortMatrikkelenhetRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommuneIdent" type="kommunens:KommuneIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelkartEnkelSosi34RapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelkartEnkelSosi34RapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelkartFullstendigSosi40RapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelkartFullstendigSosi40RapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelkartEnkelDekTeigSosi40RapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelkartEnkelDekTeigSosi40RapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelReprPktAlleRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelReprPktAlleRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelReprPktHovedRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelReprPktHovedRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateSamletMatrikkelRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateSamletMatrikkelRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateSamletMatrikkelUtenKartRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateSamletMatrikkelUtenKartRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateKommunalTilleggsdelRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateKommunalTilleggsdelRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateMatrikkelbrevRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateMatrikkelbrevRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateNabolisteRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateNabolisteRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommuneIdent" type="kommunens:KommuneIdent"/>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelenhetIdents" type="matrikkelenhetns:MatrikkelenhetIdent" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateVegendringsRapportRequest -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateVegendringsRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommuneIdent" type="kommunens:KommuneIdent"/>
+				<xs:element name="fra" type="xs:date"/>
+				<xs:element name="til" type="xs:date"/>
+				<xs:element name="endringskilder" type="fellesns:EndringsKildeKode" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateAdresseEndringRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateAdresseEndringRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommuneIdent" type="kommunens:KommuneIdent"/>
+				<xs:element name="fra" type="xs:date" minOccurs="0"/>
+				<xs:element name="til" type="xs:date" minOccurs="0"/>
+				<xs:element name="endringskilder" type="fellesns:EndringsKildeKode" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateVeghistorikkRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateVeghistorikkRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="vegHistorikkSokModel" type="matrikkelsokns:VegHistorikksokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: CreateSefrakRapportRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="CreateSefrakRapportRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sefraksokModel" type="sefrakns:SefraksokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: RapportResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="RapportResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelRapport" type="rapportns:MatrikkelRapport"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobbIdent" type="rapportns:JobbIdent"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbListResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbListResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobber" type="rapportns:Jobb" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbIdentListResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbIdentListResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobbIdenter" type="rapportns:JobbIdent" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbIdentRequest -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobbIdent" type="rapportns:JobbIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbListRequest -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbListRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobber" type="rapportns:JobbIdent" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JobbStatusKodeListRequest -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="JobbStatusKodeListRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jobbStatusKoder" type="rapportns:JobbStatusKode" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

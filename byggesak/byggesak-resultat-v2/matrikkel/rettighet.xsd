@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rettighet" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rettighet" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/rettighet" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rettighet" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarRettighetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="HarRettighetRequest">
+		<xs:sequence>
+			<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarRettighetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="HarRettighetResponse">
+		<xs:sequence>
+			<xs:element name="harRettighet" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesEierforholdRettighetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesEierforholdRettighetRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetRequest"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesEierforholdRettighetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesEierforholdRettighetResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesFnrRettighetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesFnrRettighetRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetRequest"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesFnrRettighetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesFnrRettighetResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesKommunaleTilleggsdataRettighetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesKommunaleTilleggsdataRettighetRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetRequest"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarLesKommunaleTilleggsdataRettighetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarLesKommunaleTilleggsdataRettighetResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarTaUtRapporterRettighetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarTaUtRapporterRettighetRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetRequest">
+					<xs:sequence>
+						<xs:element name="kommunenr" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Kommunenummeret for kommunen der rettigheten gjelder.
+                           Dersom kommunenummer ikke oppgis, sjekkes rettighet for landsforvaltning.
+                        </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HarTaUtRapporterRettighetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="HarTaUtRapporterRettighetResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="HarRettighetResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" xmlns:ovp="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-person-v2" elementFormDefault="qualified" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:ov="http://skjema.kxml.no/oppvekst">
+  <!-- Generert av Arkitektum xsd generator(0.8.0.0) - 10.07.2012 15:56:31-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31/giFellesKontakt20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/oppvekst" schemaLocation="http://skjema.kxml.no/oppvekst/oppvekst-v2.xsd" />
+  <xs:element name="Preutfyllresultat" type="ovp:PreutfyllresultatType" />
+  <xs:complexType name="PreutfyllresultatListe">
+    <xs:sequence>
+      <xs:element name="preutfyllresultat" type="ovp:PreutfyllresultatType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreutfyllresultatType">
+    <xs:sequence>
+      <xs:element name="familier" minOccurs="0" maxOccurs="1" type="ov:FamilieListe" />
+    </xs:sequence>
+    <xs:attributeGroup ref="felles:PreutfyllMetadataType" />
+  </xs:complexType>
+</xs:schema>

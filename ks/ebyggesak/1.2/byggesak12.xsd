@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/byggesak/1.2" xmlns:bs="http://skjema.kxml.no/byggesak/1.2" elementFormDefault="qualified" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31" xmlns:rest="http://www.kxml.no/rest/1.0" xmlns:matrikkelfellesns="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2012.01.31" xmlns:planfellesns="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31">
+  <!-- Generert av MetaTrans(1.1.0.0) - 11.08.2017 15.57.24-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31/giFellesGeometri20120131.xsd" />
+  <xs:import namespace="http://www.kxml.no/rest/1.0" schemaLocation="rest.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Matrikkel/Felles/xml.schema/2012.01.31/giMatrikkelFelles20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Plan/Felles/xml.schema/2012.01.31/giPlanFelles20120131.xsd" />
+  <xs:element name="Aktivitet" type="bs:AktivitetType" />
+  <xs:complexType name="AktivitetListe">
+    <xs:sequence>
+      <xs:element name="aktivitet" type="bs:AktivitetType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AktivitetType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="typeSjekk" minOccurs="1" maxOccurs="1" type="bs:SjekkpunkttypeType" />
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="bs:AktivitetsstatusType" />
+          <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="frist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+          <xs:element name="kommentar" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="ansvarlig" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="dokumentkategori" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="referanseJournalpost" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SystemIDType" />
+          <xs:element name="referanseDokument" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SystemIDType" />
+          <xs:element name="milepel" minOccurs="1" maxOccurs="1" type="bs:MilepelType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Aktivitetsstatus" type="bs:AktivitetsstatusType" />
+  <xs:complexType name="AktivitetsstatusType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Byggesak" type="bs:ByggesakType" />
+  <xs:complexType name="ByggesakListe">
+    <xs:sequence>
+      <xs:element name="byggesak" type="bs:ByggesakType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ByggesakType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="systemId" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="saksnummer" minOccurs="1" maxOccurs="1" type="bs:SaksnummerType" />
+          <xs:element name="referanseKlagesaker" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SaksnummerListe" />
+          <xs:element name="referanseAndreSaker" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SaksnummerListe" />
+          <xs:element name="tittel" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="adresse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="posisjon" minOccurs="0" maxOccurs="1" nillable="true" type="fellesgeometrins:Punkt" />
+          <xs:element name="matrikkelnummer" minOccurs="0" maxOccurs="1" nillable="true" type="matrikkelfellesns:MatrikkelnummerListe" />
+          <xs:element name="bygningsnummer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:integer" />
+          <xs:element name="registrertDato" minOccurs="1" maxOccurs="1" type="xs:dateTime" />
+          <xs:element name="avsluttetDato" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+          <xs:element name="gjeldendePlan" minOccurs="0" maxOccurs="1" nillable="true" type="planfellesns:NasjonalArealplanIdListe" />
+          <xs:element name="saksbehandling" minOccurs="0" maxOccurs="1" nillable="true" type="bs:ProsessListe" />
+          <xs:element name="vilkaar" minOccurs="0" maxOccurs="1" nillable="true" type="bs:VilkaarListe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Dispensasjon" type="bs:DispensasjonType" />
+  <xs:complexType name="DispensasjonListe">
+    <xs:sequence>
+      <xs:element name="dispensasjon" type="bs:DispensasjonType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DispensasjonType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="dispensasjonstype" minOccurs="1" maxOccurs="1" type="bs:DispensasjonstypeType" />
+          <xs:element name="begrunnelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="fraPlan" minOccurs="0" maxOccurs="1" nillable="true" type="planfellesns:NasjonalArealplanId" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Dispensasjonstype" type="bs:DispensasjonstypeType" />
+  <xs:complexType name="DispensasjonstypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fase" type="bs:FaseType" />
+  <xs:complexType name="FaseListe">
+    <xs:sequence>
+      <xs:element name="fase" type="bs:FaseType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaseType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="fasenavn" minOccurs="1" maxOccurs="1" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Gebyrlinje" type="bs:GebyrlinjeType" />
+  <xs:complexType name="GebyrlinjeListe">
+    <xs:sequence>
+      <xs:element name="gebyrlinje" type="bs:GebyrlinjeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GebyrlinjeType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:integer" />
+          <xs:element name="artikkelnummer" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="beskrivelse" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="antall" minOccurs="1" maxOccurs="1" type="xs:double" />
+          <xs:element name="enhet" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="pris" minOccurs="1" maxOccurs="1" type="xs:double" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Mangel" type="bs:MangelType" />
+  <xs:complexType name="MangelListe">
+    <xs:sequence>
+      <xs:element name="mangel" type="bs:MangelType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MangelType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="systemId" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="type" minOccurs="1" maxOccurs="1" type="bs:MangeltypeType" />
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="bs:MangelstatusType" />
+          <xs:element name="registrertDato" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+          <xs:element name="prosess" minOccurs="1" maxOccurs="1" type="bs:ProsessType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Mangelstatus" type="bs:MangelstatusType" />
+  <xs:complexType name="MangelstatusType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Mangeltype" type="bs:MangeltypeType" />
+  <xs:complexType name="MangeltypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Milepel" type="bs:MilepelType" />
+  <xs:complexType name="MilepelListe">
+    <xs:sequence>
+      <xs:element name="milepel" type="bs:MilepelType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MilepelType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="systemId" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="kategori" minOccurs="1" maxOccurs="1" type="bs:MilepeltypeType" />
+          <xs:element name="frist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+          <xs:element name="utfoert" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+          <xs:element name="journaldato" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+          <xs:element name="intern" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+          <xs:element name="referanseJournalpost" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SystemIDType" />
+          <xs:element name="referanseDokument" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SystemIDType" />
+          <xs:element name="faseFoerMilepel" minOccurs="0" maxOccurs="1" nillable="true" type="bs:FaseType" />
+          <xs:element name="faseEtterMilepel" minOccurs="0" maxOccurs="1" nillable="true" type="bs:FaseType" />
+          <xs:element name="sjekkliste" minOccurs="0" maxOccurs="1" nillable="true" type="bs:AktivitetListe" />
+          <xs:element name="prosess" minOccurs="1" maxOccurs="1" type="bs:ProsessType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Milepeltype" type="bs:MilepeltypeType" />
+  <xs:complexType name="MilepeltypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prosess" type="bs:ProsessType" />
+  <xs:complexType name="ProsessListe">
+    <xs:sequence>
+      <xs:element name="prosess" type="bs:ProsessType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProsessType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="systemId" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="kategori" minOccurs="1" maxOccurs="1" type="bs:ProsesskategoriType" />
+          <xs:element name="antallUkerFrist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:integer" />
+          <xs:element name="medDispensasjon" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+          <xs:element name="medReguleringsendring" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+          <xs:element name="prosesskoe" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="prosessteam" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="prosessansvarlig" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="gebyrunderlag" minOccurs="0" maxOccurs="1" nillable="true" type="bs:GebyrlinjeListe" />
+          <xs:element name="byggesak" minOccurs="1" maxOccurs="1" type="bs:ByggesakType" />
+          <xs:element name="resultat" minOccurs="0" maxOccurs="1" nillable="true" type="bs:VedtakListe" />
+          <xs:element name="milepeler" minOccurs="0" maxOccurs="1" nillable="true" type="bs:MilepelListe" />
+          <xs:element name="mangler" minOccurs="0" maxOccurs="1" nillable="true" type="bs:MangelListe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Prosesskategori" type="bs:ProsesskategoriType" />
+  <xs:complexType name="ProsesskategoriType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Saksnummer" type="bs:SaksnummerType" />
+  <xs:complexType name="SaksnummerListe">
+    <xs:sequence>
+      <xs:element name="saksnummer" type="bs:SaksnummerType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaksnummerType">
+    <xs:sequence>
+      <xs:element name="saksaar" minOccurs="1" maxOccurs="1" type="xs:integer" />
+      <xs:element name="sakssekvensnummer" minOccurs="1" maxOccurs="1" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sjekkpunkttype" type="bs:SjekkpunkttypeType" />
+  <xs:complexType name="SjekkpunkttypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SystemIDType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="SystemIDListe">
+    <xs:sequence>
+      <xs:element name="systemid" type="bs:SystemIDType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Vedtak" type="bs:VedtakType" />
+  <xs:complexType name="VedtakListe">
+    <xs:sequence>
+      <xs:element name="vedtak" type="bs:VedtakType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VedtakType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="systemId" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="vedtaksdato" minOccurs="1" maxOccurs="1" type="xs:dateTime" />
+          <xs:element name="status" minOccurs="1" maxOccurs="1" type="bs:VedtakstypeType" />
+          <xs:element name="referanseDokumentVedtak" minOccurs="1" maxOccurs="1" type="bs:SystemIDType" />
+          <xs:element name="referanseJournalpostVedtak" minOccurs="1" maxOccurs="1" type="bs:SystemIDType" />
+          <xs:element name="referanseUnderlagsdokumenter" minOccurs="0" maxOccurs="1" nillable="true" type="bs:SystemIDListe" />
+          <xs:element name="dispensasjoner" minOccurs="0" maxOccurs="1" nillable="true" type="bs:DispensasjonListe" />
+          <xs:element name="prosess" minOccurs="1" maxOccurs="1" type="bs:ProsessType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Vilkaar" type="bs:VilkaarType" />
+  <xs:complexType name="VilkaarListe">
+    <xs:sequence>
+      <xs:element name="vilkaar" type="bs:VilkaarType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VilkaarType">
+    <xs:complexContent>
+      <xs:extension base="rest:AbstraktResourceType">
+        <xs:sequence>
+          <xs:element name="vilkaarId" minOccurs="1" maxOccurs="1" type="xs:string" />
+          <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+          <xs:element name="vilkaarTilProsess" minOccurs="1" maxOccurs="1" type="bs:ProsesskategoriType" />
+          <xs:element name="byggesak" minOccurs="1" maxOccurs="1" type="bs:ByggesakType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Vedtakstype" type="bs:VedtakstypeType" />
+  <xs:complexType name="VedtakstypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

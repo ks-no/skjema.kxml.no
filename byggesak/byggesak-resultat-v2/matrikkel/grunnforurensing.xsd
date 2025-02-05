@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:grunnforurensingns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/grunnforurensing" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/grunnforurensing" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: grunnforurensing  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Grunnforurensing  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Grunnforurensing">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="ident" type="grunnforurensingns:GrunnforurensingIdent"/>
+					<xs:element name="lokalitetsnavn" type="xs:string"/>
+					<xs:element name="pavirkningsgradKode" type="grunnforurensingns:PavirkningsgradKode"/>
+					<xs:element name="myndighetKode" type="grunnforurensingns:MyndighetKode"/>
+					<xs:element name="vedtak" type="grunnforurensingns:Vedtak" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:group ref="matrikkelenhetns:MatrikkelenhetIdentGruppe"/>
+					<xs:element name="matrikkelforingsDato" type="xs:date"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Vedtak  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Vedtak">
+		<xs:sequence>
+			<xs:element name="vedtaksDato" type="xs:dateTime"/>
+			<xs:element name="vedtakstypeKode" type="grunnforurensingns:VedtakstypeKode"/>
+			<xs:group ref="matrikkelenhetns:MatrikkelenhetIdentGruppe"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: GrunnforurensingIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="GrunnforurensingIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="lokalitetsnr" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MyndighetKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MyndighetKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PavirkningsgradKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PavirkningsgradKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VedtakstypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VedtakstypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindGrunnforurensingerForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindGrunnforurensingerForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindGrunnforurensingerForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindGrunnforurensingerForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="grunnforurensinger" type="grunnforurensingns:Grunnforurensing" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: person  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Person  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Person">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="nr" type="xs:string" minOccurs="0"/>
+					<xs:element name="navn" type="xs:string" minOccurs="0"/>
+					<xs:element name="adresse" type="xs:string" minOccurs="0"/>
+					<xs:element name="postnr" type="xs:string" minOccurs="0"/>
+					<xs:element name="poststed" type="xs:string" minOccurs="0"/>
+					<xs:element name="landKode" type="personns:LandKode"/>
+					<xs:element name="personKategoriKode" type="personns:PersonKategoriKode"/>
+					<xs:element name="personStatusKode" type="personns:PersonStatusKode" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PersonKategoriKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PersonKategoriKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PersonStatusKode -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PersonStatusKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: LandKode -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="LandKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PersonsokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PersonsokModel">
+		<xs:sequence>
+			<xs:element name="person" type="personns:Person"/>
+			<xs:element name="kommunenr" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JuridiskPersonIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="JuridiskPersonIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="organisasjonsnummer" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Organisasjonsnummer</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

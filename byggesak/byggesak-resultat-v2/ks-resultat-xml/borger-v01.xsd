@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			attributeFormDefault="unqualified" 
+			elementFormDefault="qualified" 
+			targetNamespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" 
+			xmlns="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" 
+			xmlns:gd="http://w3.brreg.no/seres/ks/skjemaresultat/felles/grunndata-v01" 
+			xmlns:fls="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" 
+			xmlns:ov="http://w3.brreg.no/seres/ks/skjemaresultat/oppvekst/oppvekst-v01">
+
+	<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/grunndata-v01" schemaLocation="grunndata-v01.xsd"/>
+	<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" schemaLocation="felles-v01.xsd"/>
+	<xsd:complexType name="Borger">
+	    <xsd:complexContent>
+	        <xsd:extension base="gd:Person">
+	            <xsd:sequence>
+	                <xsd:element name="adresse" type="FullAdresse"/>
+	                <xsd:element name="eadresser" minOccurs="0" type="EadresseListe">
+	                </xsd:element>
+	                <xsd:element name="spraak" type="fls:Spraak" minOccurs="0"/>
+	                <xsd:element name="nasjonalitet" minOccurs="0" type="fls:Nasjonalitet"/>
+	            </xsd:sequence>
+	        </xsd:extension>
+	    </xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EadresseListe">
+		<xsd:sequence>
+			<xsd:element name="eadresse" type="PrioriterbarEadresse" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="EadresseKategori">
+		<xsd:annotation>
+			<xsd:documentation>Angir type adresse. I hovedsak angis hvorvidt det er en privat eller en jobbadresse det dreier seg om. Hvis det skal angis adresser i flere kategorier 
+			må det altså angis en egen eadresse for disse. Det samme gjelder hvis epost, telefonnummer eller telefaks skal gis forskjellig prioritet.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Privat"/>
+			<xsd:enumeration value="Jobb"/>
+			<xsd:enumeration value="Privat mobil"/>
+			<xsd:enumeration value="Jobb mobil"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="PrioriterbarEadresse">
+		<xsd:annotation>
+			<xsd:documentation>PrioriterbarEadresse er en aggregasjon av SERES ElektroniskAdresser (email, faks tlf) hvor man i tillegg kan angi en prioritet og beskrivelse for adressen. 
+Beskrivelsen er en enumerert type; (1-mobil jobb, 2-mobil privat ...)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="epostadresse" type="gd:Epostadresse" minOccurs="0"/>
+			<xsd:element name="telefonnummer" type="gd:Telefonnummer" minOccurs="0"/>
+			<xsd:element name="telefaks" type="gd:Faksnummer" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="prioritet" type="xsd:positiveInteger" use="optional"/>
+		<xsd:attribute name="kategori" type="EadresseKategori" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="FullAdresse">
+		<xsd:complexContent>
+			<xsd:extension base="gd:Gateadresse">
+				<xsd:sequence>
+					<xsd:element name="postadresse" type="gd:PostadministrativeOmraader"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="eBorger">
+		<xsd:annotation>
+			<xsd:documentation>Informasjon om den brukeren som logget inn og fyllte ut skjemaet</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="Borger">
+				<xsd:sequence>
+					<xsd:element name="brukernavn" type="xsd:string"/>
+					<xsd:element name="autentiseringinfo" type="fls:AutentiseringInfo" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Foresatt">
+
+	    <xsd:annotation>
+
+	        <xsd:documentation>
+
+	            Med foresatt menes enhver person som har omsorg for, eller har annen tilknytning til barnet. 
+			Attributtet "bor-med-barnet" benyttes bl.a. for å få riktig familieknytninger, og riktig avgiftsberegning
+
+	        </xsd:documentation>
+
+	    </xsd:annotation>
+
+	    <xsd:complexContent>
+
+	        <xsd:extension base="Borger">
+
+				<xsd:sequence>
+
+				    <xsd:element name="rolle" minOccurs="0" type="Rolle">
+
+				    </xsd:element>
+
+				    <xsd:element name="sivilstand" type="Sivilstand"/>
+
+				</xsd:sequence>
+
+				<xsd:attribute name="bor-med-barnet" type="xsd:boolean" use="required"/>
+
+	        </xsd:extension>
+
+	    </xsd:complexContent>
+
+	</xsd:complexType>
+	<xsd:complexType name="Foresatte">
+		<xsd:annotation>
+			<xsd:documentation>Null eller flere foresatte</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="foresatt" type="Foresatt" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="Rolle">
+	    <xsd:annotation>
+	        <xsd:documentation>Angir hvilken rolle vedkommende foresatt har i forhold til barnet.</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	        <xsd:enumeration value="Mor"/>
+	        <xsd:enumeration value="Far"/>
+	        <xsd:enumeration value="Verge"/>
+	        <xsd:enumeration value="Foreldresamboer"/>
+	        <xsd:enumeration value="Bestemor"/>
+	        <xsd:enumeration value="Bestefar"/>
+	        <xsd:enumeration value="Annen Familie"/>
+	        <xsd:enumeration value="Forsørger"/>
+	        <xsd:enumeration value="Annet"/>
+	    </xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Sivilstand">
+	    <xsd:restriction base="xsd:string">
+	        <xsd:enumeration value="Gift"/>
+	        <xsd:enumeration value="Enslig"/>
+	        <xsd:enumeration value="Enke"/>
+	        <xsd:enumeration value="Enkemann"/>
+	        <xsd:enumeration value="Samboer"/>
+	    </xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kommunens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: kommune  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KommuneIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KommuneIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="kommunenr" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Kommune  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Kommune">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="kommunenr" type="xs:string"/>
+					<xs:element name="kommunenavn" type="xs:string"/>
+					<xs:element name="gyldigTilDato" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAlleKommunerRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAlleKommunerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAlleKommunerResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAlleKommunerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommune" type="kommunens:Kommune" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindKommuneRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindKommuneRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommuneNr" type="xs:string"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindKommuneResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindKommuneResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kommune" type="kommunens:Kommune"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: matrikkelenhet  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ArealIForretning  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ArealIForretning">
+		<xs:sequence>
+			<xs:element name="areal" type="xs:double"/>
+			<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+			<xs:element name="rolleIForretningKode" type="matrikkelenhetns:RolleIForretningKode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: RolleIForretningKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="RolleIForretningKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ArealkildeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ArealkildeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EiendomsTypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EiendomsTypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: JordskifteKrevd  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="JordskifteKrevd">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="jordskifteKrevdFortDato" type="xs:date"/>
+					<xs:element name="jordskifteReferanse" type="xs:string" minOccurs="0"/>
+					<xs:element name="matrikkelenhetId" type="matrikkelenhetns:MatrikkelenhetIdent" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SamlaFastEiendom  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SamlaFastEiendom">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="samlaFastEiendomFortDato" type="xs:date"/>
+					<xs:element name="samlaFastEiendomReferanse" type="xs:string" minOccurs="0"/>
+					<xs:element name="samlaFastEdmMatrikkelenheter" type="matrikkelenhetns:MatrenhForSamlaFastEdm" minOccurs="2" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Klage  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Klage">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="klageFortDato" type="xs:date"/>
+					<xs:element name="klageReferanse" type="xs:string" minOccurs="0"/>
+					<xs:element name="hvaKlagenGjelder" type="xs:string" minOccurs="0"/>
+					<xs:element name="matrikkelenhetId" type="matrikkelenhetns:MatrikkelenhetIdent" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrenhForSamlaFastEdm  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrenhForSamlaFastEdm">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0"/>
+			<xs:element name="samlaFastEiendom" type="matrikkelenhetns:SamlaFastEiendom"/>
+			<xs:element name="matrikkelenhetId" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+			<xs:element name="hovedmatrikkelenhet" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Grunnerverv  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Grunnerverv">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="grunnervervFortDato" type="xs:date"/>
+					<xs:element name="grunnervervReferanse" type="xs:string"/>
+					<xs:element name="matrikkelenhetId" type="matrikkelenhetns:MatrikkelenhetIdent" maxOccurs="unbounded"/>
+					<xs:element name="erververId" type="personns:JuridiskPersonIdent"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Forretning  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Forretning">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="forretningIdent" type="matrikkelenhetns:ForretningIdent"/>
+					<xs:element name="forretningsdato" type="xs:date" minOccurs="0"/>
+					<xs:element name="matrikkelforingsdato" type="xs:date" minOccurs="0"/>
+					<xs:element name="kommunalSaksreferanse" type="xs:string" minOccurs="0"/>
+					<xs:element name="annenReferanse" type="xs:string" minOccurs="0"/>
+					<xs:element name="arealIForretning" type="matrikkelenhetns:ArealIForretning" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="forretningsTypeKode" type="matrikkelenhetns:ForretningsTypeKode"/>
+					<xs:element name="forretningsklasse" type="xs:string"/>
+					<xs:element name="signatur" type="xs:string" minOccurs="0"/>
+					<xs:element name="arsakTilFeilrettingKode" type="matrikkelenhetns:ArsakTilFeilrettingKode"/>
+					<xs:element name="tinglysingsstatusKode" type="matrikkelenhetns:TinglysingsstatusKode"/>
+					<xs:element name="tinglysingsstatusEndretDato" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ForretningIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ForretningIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="lopenr" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ForretningsTypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ForretningsTypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ArsakTilFeilrettingKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ArsakTilFeilrettingKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: TinglysingsstatusKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="TinglysingsstatusKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Matrikkelenhet  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Matrikkelenhet">
+		<xs:annotation>
+			<xs:documentation>Eiendom, f.eks grunneieindom</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="bruksnavn" type="xs:string" minOccurs="0"/>
+					<xs:element name="etablertDato" type="xs:date" minOccurs="0"/>
+					<xs:element name="oppgittAreal" type="xs:double"/>
+					<xs:element name="beregnetAreal" type="xs:double"/>
+					<xs:element name="arealkildeKode" type="matrikkelenhetns:ArealkildeKode"/>
+					<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+					<xs:element name="adresseIdent" type="adressens:AdresseIdent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="bruksenhetIdent" type="bygningns:BruksenhetIdent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="representasjonspunkt" type="fellesns:Representasjonspunkt" minOccurs="0"/>
+					<xs:element name="eiendomsTypeKode" type="matrikkelenhetns:EiendomsTypeKode"/>
+					<xs:element name="erSeksjonert" type="xs:boolean"/>
+					<xs:element name="utgatt" type="xs:boolean"/>
+					<xs:element name="underSammenslaingBestar" type="xs:boolean"/>
+					<xs:element name="underSammenslaingUtgar" type="xs:boolean"/>
+					<xs:element name="oppmalingIkkeFullfort" type="xs:boolean"/>
+					<xs:element name="fristOppmaling" type="xs:date" minOccurs="0"/>
+					<xs:element name="mangelMatrikkelforingsKrav" type="xs:boolean"/>
+					<xs:element name="fristMatrikkelforingsKrav" type="xs:date" minOccurs="0"/>
+					<xs:element name="sameieBrok" type="fellesns:Andel" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Angir sameiebrøk for seksjon</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="formalSeksjonKode" type="matrikkelenhetns:FormalSeksjonKode" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Angir formål for seksjon</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="punktfeste" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Angir om festegrunn er punktfeste</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nymatrikulert" type="xs:boolean"/>
+					<xs:element name="harAktiveFestegrunner" type="xs:boolean"/>
+					<xs:element name="harAnmerketKlage" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten har anmerket klage</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="harRegistrertGrunnerverv" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten har registrert grunnerverv</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="harRegistrertJordskifteKrevd" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten har registrert JordskifteKrevd</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="inngarISamlaFastEiendom" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten inngar i samla fast eiendom</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="harGrunnforurensing" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten er tilknyttet grunnforurensing</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="harKulturminne" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Angir om denne matrikkelenheten er tilknyttet kulturminne</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tinglyst" type="xs:boolean"/>
+					<xs:element name="festetMatrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Angir identer for matrikkelenheter som festegrunn er festet på</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="seksjonertMatrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Angir identer for matrikkelenheter som seksjon er seksjonert på</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="anleggsTypeKode" type="matrikkelenhetns:AnleggsTypeKode" minOccurs="0"/>
+					<xs:element name="avklartEiere" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Om det er fullstendig avklart hvilke matrikkelenheter som er eiere.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="avklartAndeler" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Om det er fullstendig avklart hvilke andeler eierne har.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelenhetIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelenhetIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident">
+				<xs:sequence>
+					<xs:element name="kommunenr" type="xs:string"/>
+					<xs:element name="gardsnr" type="xs:int"/>
+					<xs:element name="bruksnr" type="xs:int"/>
+					<xs:element name="festenr" type="xs:int" minOccurs="0"/>
+					<xs:element name="seksjonsnr" type="xs:int" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Group: MatrikkelenhetIdentGruppe  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:group name="MatrikkelenhetIdentGruppe">
+		<xs:sequence>
+			<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ArealmerknadKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ArealmerknadKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: HjelpelinjetypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="HjelpelinjetypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: GrensepunktmerkeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="GrensepunktmerkeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: GrensepunkttypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="GrensepunkttypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FormalSeksjonKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="FormalSeksjonKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AnleggsTypeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AnleggsTypeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Medium  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Medium">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForIdentRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForIdentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForIdentResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForIdentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForAdresseRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForAdresseRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adresseIdent" type="adressens:AdresseIdent">
+					<xs:annotation>
+						<xs:documentation>
+                     Angivelse av undernr for en MatrikkeladresseIdent har foreløpig ingen effekt da dette ikke benyttes i søket.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForAdresseResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForAdresseResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForVegRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForVegRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="delAvAdressenavn" type="xs:string"/>
+				<xs:element name="kommunenr" type="xs:string"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForVegResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForVegResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForBygningRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForBygningRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="byggIdent" type="bygningns:ByggIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForBygningResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForBygningResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForIdRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForIdResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForTeigIdRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForTeigIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="teigId" type="xs:long"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForTeigIdResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForTeigIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForAnleggsprojeksjonsFlateRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForAnleggsprojeksjonsFlateRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flateId" type="xs:long"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForAnleggsprojeksjonsFlateResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForAnleggsprojeksjonsFlateResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindNaboerRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindNaboerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="maxAvstand" type="xs:int"/>
+				<xs:element name="medFestaPa" type="xs:boolean"/>
+				<xs:element name="medFester" type="xs:boolean"/>
+				<xs:element name="medSeksjoner" type="xs:boolean"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindNaboerResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindNaboerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindForretningerForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindForretningerForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindForretningerForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindForretningerForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="forretning" type="matrikkelenhetns:Forretning" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindKlagerForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindKlagerForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindKlagerForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindKlagerForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="klage" type="matrikkelenhetns:Klage" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindJordskifteKrevdForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindJordskifteKrevdForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindJordskifteKrevdForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindJordskifteKrevdForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jordskifteKrevd" type="matrikkelenhetns:JordskifteKrevd" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindGrunnervervForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindGrunnervervForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindGrunnervervForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindGrunnervervForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="grunnerverv" type="matrikkelenhetns:Grunnerverv" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSamlaFastEiendomForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSamlaFastEiendomForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSamlaFastEiendomForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSamlaFastEiendomForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="samlaFastEiendom" type="matrikkelenhetns:SamlaFastEiendom" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSeksjonerForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSeksjonerForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindSeksjonerForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindSeksjonerForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindFestegrunnerForMatrikkelenhetRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindFestegrunnerForMatrikkelenhetRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindFestegrunnerForMatrikkelenhetResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindFestegrunnerForMatrikkelenhetResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

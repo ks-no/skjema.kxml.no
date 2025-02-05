@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema elementFormDefault="qualified" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" version="1.0 - [Matrikkelen v.2.1.1]" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- ================================================= -->
+	<!-- Package: felles  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Representasjonspunkt  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Representasjonspunkt">
+		<xs:sequence>
+			<xs:element name="point" type="fellesns:PointType"/>
+			<xs:element minOccurs="0" name="kvalitet" type="fellesns:Kvalitet"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Ident  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType abstract="true" name="Ident">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="unikId" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BrukerIdent  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BrukerIdent">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Ident"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Kode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType abstract="true" name="Kode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:MatrikkelObject">
+				<xs:sequence>
+					<xs:element name="kodeverdi" type="xs:string"/>
+					<xs:element name="beskrivelse" type="xs:string"/>
+					<xs:element minOccurs="0" name="kodenr" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Andel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Andel">
+		<xs:sequence>
+			<xs:element name="teller" type="xs:long"/>
+			<xs:element name="nevner" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: Kvalitet  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="Kvalitet">
+		<xs:sequence>
+			<xs:element name="malemetodeKode" type="fellesns:MalemetodeKode"/>
+			<xs:element name="noyaktighet" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MalemetodeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MalemetodeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: NoyaktighetsklasseKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="NoyaktighetsKlasseKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: KoordinatsystemKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="KoordinatsystemKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode">
+				<xs:attribute name="oracleSRID" type="xs:int"/>
+				<xs:attribute name="sosiKode" type="xs:int"/>
+				<xs:attribute name="epsgKode" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: EndringsKildeKode  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="EndringsKildeKode">
+		<xs:complexContent>
+			<xs:extension base="fellesns:Kode"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelContext  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelContext">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="sosiKode" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Angir SOSI-kode for koordinatsystemet. Hvis ikke oppgitt, brukes SOSI-kode 22, som svarer til EUREF89 UTM Sone 32.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element default="2.1.1" name="matrikkelKlientversjon" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Denne har defaultverdi lik deployet versjon, men kan settes til en tidligere
+                  versjon om ønskelig. Versjonsnummerne er på formen 1.10 eller 1.10.1.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SelectionPolygon-->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SelectionPolygon">
+		<xs:sequence>
+			<xs:element name="punkter" type="fellesns:PointType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelObject  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType abstract="true" name="MatrikkelObject">
+		<xs:sequence>
+			<xs:element name="versjon" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>
+                  Kontrollfelt som muliggjør oppdatering av objekter med passiv låsing.
+                  Dersom denne har verdi 0 betyr dette at data for sist oppdatering ikke finnes.
+                  Dersom denne har verdi -1 betyr at data ikke er relevant.
+                  
+                  Feltet inneholder et timestamp (servertid) for siste oppdatering av objektet. Verdien blir målt i
+                  millisekunder siden midnatt til 1.januar 1970 UTC/GMT.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: ImplementationException  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="ImplementationException"/>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: PointType kopiert fra GML3.0   -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="PointType">
+		<xs:annotation>
+			<xs:documentation>A Point is defined by a single coordinate tuple.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>GML supports two different ways to specify the direct poisiton of a point. 1. The "pos"
+                  element is of type
+                  DirectPositionType.
+               </xs:documentation>
+				</xs:annotation>
+				<xs:element ref="fellesns:coordinates">
+					<xs:annotation>
+						<xs:documentation>Deprecated with GML version 3.1.0 for coordinates with ordinate values that are
+                     numbers. Use "pos"
+                     instead. The "coordinates" element shall only be used for coordinates with ordinates that require a
+                     string
+                     representation, e.g. DMS representations.
+                  </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="srsName" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation>In general this reference points to a CRS instance of gml:CoordinateReferenceSystemType
+               (see coordinateReferenceSystems.xsd). For well known references it is not required that the CRS
+               description exists at the
+               location the URI points to. If no srsName attribute is given, the CRS must be specified as part of the
+               larger context this
+               geometry element is part of, e.g. a geometric element like point, curve, etc. It is expected that this
+               attribute will be specified
+               at the direct position level only in rare cases.
+            </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="coordinates" type="fellesns:CoordinatesType">
+		<xs:annotation>
+			<xs:documentation>Deprecated with GML version 3.1.0.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CoordinatesType">
+		<xs:annotation>
+			<xs:documentation>Tables or arrays of tuples.
+        May be used for text-encoding of values from a table.
+        Actually just a string, but allows the user to indicate which characters are used as separators.
+        The value of the 'cs' attribute is the separator for coordinate values,
+        and the value of the 'ts' attribute gives the tuple separator (a single space by default);
+        the default values may be changed to reflect local usage.
+        Defaults to CSV within a tuple, space between tuples.
+        However, any string content will be schema-valid.  </xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute default="." name="decimal" type="xs:string"/>
+				<xs:attribute default="," name="cs" type="xs:string"/>
+				<xs:attribute default=" " name="ts" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

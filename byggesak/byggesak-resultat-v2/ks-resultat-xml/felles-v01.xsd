@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" 
+			xmlns="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" 
+			xmlns:bgr="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" 
+			attributeFormDefault="unqualified" 
+			elementFormDefault="qualified">
+
+		<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" schemaLocation="borger-v01.xsd"/>
+			
+		<xsd:simpleType name="Maalform">
+        	<xsd:restriction base="xsd:string">
+	            <xsd:annotation>
+	                <xsd:documentation>Målform/språk brukt i skjermdialogen. Språkkodene er 3 bokstavkoder fra ISO 639.2. Vi avviker fra KSSkjemaAttributter i "KS_Skjema-XML_1.01.pdf" (avsnitt 3.9), ved at alle språkkoder kan benyttes, hvor KS_Skjema-XML_1.01.pdf spesifiserer et subsett av 5 norske språkkoder. </xsd:documentation>
+	            </xsd:annotation>
+	            <xsd:length value="3"/></xsd:restriction>
+    	</xsd:simpleType>
+		<xsd:complexType name="Spraak">
+        <xsd:annotation>
+            <xsd:documentation>
+			Angir et språk. Det er ikke spesifisert hvilket sett språkkoder, eller hvilke benevnelser som 
+			skal anvendes da dette kan være forskjellig i forskjellige integrasjoner og fagsystemer. 
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="spraak-tekst" use="required" type="xsd:string"/>
+        <xsd:attribute name="spraak-kode" use="required" type="xsd:string"/>
+    </xsd:complexType>
+		<xsd:complexType name="SpraakListe">
+		    <xsd:sequence>
+		        <xsd:element name="spraak" type="Spraak" maxOccurs="unbounded" minOccurs="0"/>
+		    </xsd:sequence>
+		</xsd:complexType>
+		<xsd:complexType name="Nasjonalitet">
+		    <xsd:annotation>
+		        <xsd:documentation>Angir en nasjonalitet i form av en tekst/beskrivelse og en kode. Det er ikke spesifisert hvilke koder som skal anvendes da dette kan variere i forskjellige integrasjoner.</xsd:documentation>
+		    </xsd:annotation>
+		    <xsd:attribute name="nasjonalitet-kode" use="required" type="xsd:string"/>
+		    <xsd:attribute name="nasjonalitet-tekst" use="required" type="xsd:string"/>
+		</xsd:complexType>
+		<xsd:complexType name="NasjonalitetListe">
+		    <xsd:sequence>
+		        <xsd:element name="nasjonalitet" type="Nasjonalitet" minOccurs="1" maxOccurs="unbounded"/>
+		    </xsd:sequence>
+		</xsd:complexType><xsd:attributeGroup name="KSResultAttributter">
+        <xsd:annotation>
+            <xsd:documentation>Attributter som er definert i "KS_Skjema-XML_1.01.pdf" (avsnitt 6)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="formid" use="required" type="xsd:string"/>
+        <xsd:attribute name="formversion" use="required" type="xsd:string"/>
+        <xsd:attribute name="resultsource" use="required" type="xsd:string"/>
+        <xsd:attribute name="resultsystem" use="required" type="xsd:string"/>
+        <xsd:attribute name="resultid" use="required" type="xsd:string"/>
+        <xsd:attribute name="resultdate" type="xsd:dateTime" use="required"/>
+        <xsd:attribute name="resulttarget" use="required" type="xsd:string"/>
+        <xsd:attribute name="lang" type="Maalform" use="required"/>
+    </xsd:attributeGroup><xsd:complexType name="TilleggsdataInstans">
+        <xsd:sequence>
+            <xsd:any processContents="strict" maxOccurs="unbounded" minOccurs="0" namespace="##other">
+                <xsd:annotation>
+                    <xsd:documentation>Elementer som benyttes i lokale utvidelser</xsd:documentation>
+                </xsd:annotation>
+            </xsd:any>
+        </xsd:sequence>
+    </xsd:complexType><xsd:simpleType name="UkedagNummer">
+        <xsd:restriction base="xsd:positiveInteger">
+            <xsd:annotation>
+                <xsd:documentation>Ukedagnummer ihht ISO8601 (mandag=1, tirsdag=2, osv)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="7"/>
+        </xsd:restriction>
+    </xsd:simpleType><xsd:complexType name="PreutfyllMetadata">
+        <xsd:annotation>
+            <xsd:documentation>Metadata brukt i preutfylling instanser </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="kilde" type="xsd:string"/>
+            <xsd:element name="kunde" type="xsd:string"/>
+            <xsd:element name="kommentar" type="xsd:string"/>
+            <xsd:element name="opprettet" type="xsd:dateTime"/>
+        </xsd:sequence>
+    </xsd:complexType><xsd:complexType name="Sone">
+        <xsd:annotation>
+            <xsd:documentation>Sone brukes bl.a. for å angi geografiske soner for enheter</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="sone-id" use="required" type="xsd:string"/>
+        <xsd:attribute name="sone-navn" use="required" type="xsd:string"/>
+    </xsd:complexType><xsd:complexType name="SikkerhetsInfo">
+        <xsd:annotation>
+            <xsd:documentation>
+                Sikkerhetsrelatert informasjon som ikke er direkte knyttet til brukeren.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:any processContents="strict" maxOccurs="unbounded" minOccurs="0" namespace="##other">
+                <xsd:annotation>
+                    <xsd:documentation>Det er muligheter for lokale utvidelser slik at det kan lages typer for å beskrive ønsket sikkerhetsrelatert informasjon. 
+					Eksempler kan være digitale signaturer eller angivelse av sikkerhetsprotokoller</xsd:documentation>
+                </xsd:annotation>
+            </xsd:any>
+        </xsd:sequence>
+    </xsd:complexType>
+	<xsd:complexType name="SkjemaMetadata">
+        <xsd:sequence>
+            <xsd:element name="innlogget-bruker" minOccurs="0" type="bgr:eBorger">
+                <xsd:annotation>
+                    <xsd:documentation>Informasjon om innlogget bruker.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sikkerhetsinfo" type="SikkerhetsInfo">
+            </xsd:element>
+            <xsd:element name="resultid-referanse" type="ResultidReferanse" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+					Referanse til annen instans av skjema. Denne anbefalingen gir ingen føringer på hvordan dette elementet skal tolkes og benyttes.
+					Eksempel på bruk er hvis en søker "endrer" sin søknad ved å sende en ny, så kan dette elementet benyttes til å referere til den opprinnelige søknaden.
+					</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+	<xsd:complexType name="ResultidReferanse">
+	    <xsd:simpleContent>
+	        <xsd:extension base="xsd:string">
+	            <xsd:attribute name="relasjon" type="ResultidRelasjon" use="required"/>
+	        </xsd:extension>
+	    </xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="ResultidRelasjon">
+	    <xsd:annotation>
+	        <xsd:documentation>Angir relasjonen mellom denne instansen og den det refereres til. F.eks "erstatter"</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+		<xsd:complexType name="AutentiseringInfo">
+        <xsd:annotation>
+            <xsd:documentation>Informasjon om autentiseringen. Som et minimum kreves at det indikeres hvordvidt brukeren var autentisert eller ikke.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="autentisert" type="xsd:boolean"/>
+            <xsd:any processContents="strict" namespace="##other" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Lokale tillegg kan definere andre former for autentiseringsinfo</xsd:documentation>
+                </xsd:annotation>
+            </xsd:any>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

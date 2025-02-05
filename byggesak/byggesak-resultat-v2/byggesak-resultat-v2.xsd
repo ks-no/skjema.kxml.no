@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/byggesak/byggesak-resultat-v2" xmlns:byggesak="http://skjema.kxml.no/byggesak/byggesak-resultat-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" elementFormDefault="qualified" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2">
+  <!-- Generert av MetaTrans(0.9.0.2) - 24.06.2013 21:07:57-->
+  <xs:import namespace="http://www.be.no/xml/ns/byggesak/2.0" schemaLocation="sentralgodkjenning.xsd" />
+  <xs:import namespace="http://www.be.no/xml/ns/byggesak/2.0" schemaLocation="byggesak.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" schemaLocation="http://skjema.kxml.no/skjemaresultat/skjema-v2/skjema-v2.xsd" />
+  <xs:element name="Byggesak" type="byggesak:ByggesakType" />
+  <xs:complexType name="ByggesakListe">
+    <xs:sequence>
+      <xs:element name="byggesak" type="byggesak:ByggesakType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ByggesakType">
+    <xs:complexContent>
+      <xs:extension base="skj:AbstraktFagdataType">
+        <xs:sequence>
+          <xs:element  ref="be:byggesak" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Sentralgodkjenning" type="byggesak:SentralgodkjenningType" />
+  <xs:complexType name="SentralgodkjenningListe">
+    <xs:sequence>
+      <xs:element name="sentralgodkjenning" type="byggesak:SentralgodkjenningType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SentralgodkjenningType">
+    <xs:complexContent>
+      <xs:extension base="skj:AbstraktFagdataType">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" ref="be:sentralgodkjenning" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

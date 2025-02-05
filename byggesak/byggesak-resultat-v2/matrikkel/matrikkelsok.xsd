@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kommunens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" xmlns:matrikkelenhetns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:matrikkelsokns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" schemaLocation="kommune.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: matrikkelsok  -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AdressesokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AdressesokModel">
+		<xs:sequence>
+			<xs:element name="kommunenr" type="xs:string"/>
+			<xs:element name="ulikenr" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="likenr" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="adressetilleggsnavn" type="xs:string" minOccurs="0"/>
+			<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0"/>
+			<xs:element name="adresseIdent" type="adressens:AdresseIdent" minOccurs="0"/>
+			<xs:element name="finnVegadresser" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="finnMatrikkeladresser" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="veg" type="adressens:Veg" minOccurs="0"/>
+			<xs:element name="person" type="personns:Person" minOccurs="0"/>
+			<xs:element name="kretsIdent" type="adressens:KretsIdent" minOccurs="0"/>
+			<xs:element name="byggIdent" type="bygningns:ByggIdent" minOccurs="0"/>
+			<xs:element name="selectionPolygon" type="fellesns:SelectionPolygon" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: AbstractBygningsokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="AbstractBygningsokModel" abstract="true">
+		<xs:sequence>
+			<xs:element name="kommunenr" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: BygningsokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="BygningsokModel">
+		<xs:complexContent>
+			<xs:extension base="matrikkelsokns:AbstractBygningsokModel">
+				<xs:sequence>
+					<xs:element name="byggIdent" type="bygningns:ByggIdent" minOccurs="0"/>
+					<xs:element name="statusKode" type="bygningns:BygningstatusKode" minOccurs="0"/>
+					<xs:element name="tidligereStatusKode" type="bygningns:BygningstatusKode" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+                        Ved angivelse av dette elementet kan man også velge å sette tidligereStatusFra og/eller
+                        tidligereStatusTil.
+                        Ellers så har disse to feltene ingen effekt.
+                     </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tidligereStatusFra" type="xs:date" minOccurs="0"/>
+					<xs:element name="tidligereStatusTil" type="xs:date" minOccurs="0"/>
+					<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0"/>
+					<xs:element name="adresseIdent" type="adressens:AdresseIdent" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+                        Angivelse av undernr for en MatrikkeladresseIdent har foreløpig ingen effekt da dette ikke
+                        benyttes i søket.
+                     </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="adressetilleggsnavn" type="xs:string" minOccurs="0"/>
+					<xs:element name="veg" type="adressens:Veg" minOccurs="0"/>
+					<xs:element name="bestaende" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="utgatte" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="selectionPolygon" type="fellesns:SelectionPolygon" minOccurs="0"/>
+					<xs:element name="person" type="personns:Person" minOccurs="0"/>
+					<xs:element name="harSefrakminne" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="harKulturminne" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: SingleBygningsokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="SingleBygningsokModel">
+		<xs:complexContent>
+			<xs:extension base="matrikkelsokns:AbstractBygningsokModel">
+				<xs:sequence>
+					<xs:element name="bygningsnr" type="xs:long"/>
+					<xs:element name="endringer" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: MatrikkelenhetsokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="MatrikkelenhetsokModel">
+		<xs:sequence>
+			<xs:element name="kommunenr" type="xs:string"/>
+			<xs:element name="byggIdent" type="bygningns:ByggIdent" minOccurs="0"/>
+			<xs:element name="matrikkelenhetIdent" type="matrikkelenhetns:MatrikkelenhetIdent" minOccurs="0"/>
+			<xs:element name="adresseIdent" type="adressens:AdresseIdent" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Angivelse av undernr for en MatrikkeladresseIdent har foreløpig ingen effekt da dette ikke benyttes i
+                  søket.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adressetilleggsnavn" type="xs:string" minOccurs="0"/>
+			<xs:element name="veg" type="adressens:Veg" minOccurs="0"/>
+			<xs:element name="bestaende" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="utgatte" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="person" type="personns:Person" minOccurs="0"/>
+			<xs:element name="selectionPolygon" type="fellesns:SelectionPolygon" minOccurs="0"/>
+			<xs:element name="etablertDatoFra" type="xs:date" minOccurs="0"/>
+			<xs:element name="etablertDatoTil" type="xs:date" minOccurs="0"/>
+			<xs:element name="grunnerverv" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="anmerketKlage" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="inngarISamlaFastEiendom" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="jordskifteKrevd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="harGrunnforurensing" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="harKulturminne" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: VegHistorikksokModel  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:complexType name="VegHistorikksokModel">
+		<xs:sequence>
+			<xs:element name="kommuneIdent" type="kommunens:KommuneIdent"/>
+			<xs:element name="helKommune" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="bestaende" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="utgatte" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="adressekode" type="xs:string"/>
+			<xs:element name="adressenavn" type="xs:string"/>
+			<xs:element name="kortAdressenavn" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!-- Class: MatrikkelenhetSammensattSokModel -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<xs:complexType name="MatrikkelenhetSammensattSokModel">
+		<xs:sequence>
+			<xs:element name="poststed" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Beskriver navnet på postnummerområdet matrikkelenhetene eller deres adresser skal være koblet til;
+                  kan være hele eller starten av navnet på postnummerområdet.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="postnr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="adressekode" type="xs:integer" minOccurs="0"/>
+			<xs:element name="adressenavn" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Beskriver navnet på vegen matrikkelenhetene eller deres adresser skal være koblet til; kan være hele
+                  eller starten av navnet på vegen.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fonetisk" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Bestemmer om søk skal utføre fonetisk for adressenavn da det er kun adressenavn som støtter fonetisk søk.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="husnr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="bokstav" type="xs:string" minOccurs="0"/>
+			<xs:element name="kommunenr" type="xs:string" minOccurs="0"/>
+			<xs:element name="kommunenavn" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Beskriver navnet på kommunen matrikkelenhetene eller deres adresser skal være koblet til; kan være hele
+                  eller starten av navnet på kommunen.
+               </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gardsnr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="bruksnr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="festenr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="seksjonsnr" type="xs:integer" minOccurs="0"/>
+			<xs:element name="bygningsnr" type="xs:long" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresserRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresserRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adressesokModel" type="matrikkelsokns:AdressesokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAdresserResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAdresserResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="adresse" type="adressens:Adresse" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningerRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygningsokModel" type="matrikkelsokns:BygningsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindBygningerResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindBygningerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bygg" type="bygningns:Bygg" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindmatrikkelenheterRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetsokModel" type="matrikkelsokns:MatrikkelenhetsokModel"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForSammensattSokRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForSammensattSokRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelenhetSammensattSokModel" type="matrikkelsokns:MatrikkelenhetSammensattSokModel" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindMatrikkelenheterForSammensattSokResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindMatrikkelenheterForSammensattSokResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SammensattSokResultat" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="matrikkelenhet" type="matrikkelenhetns:Matrikkelenhet" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

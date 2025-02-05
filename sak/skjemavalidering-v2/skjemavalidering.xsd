@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/sak/skjemavalidering-v2" xmlns:skjv="http://skjema.kxml.no/sak/skjemavalidering-v2" elementFormDefault="qualified" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:42:01-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" schemaLocation="http://skjema.kxml.no/skjemaresultat/skjema-v2/skjema-v2.xsd" />
+  <xs:element name="Valideringsfeil" type="skjv:ValideringsfeilType" />
+  <xs:complexType name="ValideringsfeilListe">
+    <xs:sequence>
+      <xs:element name="valideringsfeil" type="skjv:ValideringsfeilType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValideringsfeilType">
+    <xs:sequence>
+      <xs:element name="feltreferanse" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="melding" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Valideringsresultat" type="skjv:ValideringsresultatType" />
+  <xs:complexType name="ValideringsresultatListe">
+    <xs:sequence>
+      <xs:element name="valideringsresultat" type="skjv:ValideringsresultatType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValideringsresultatType">
+    <xs:sequence>
+      <xs:element name="sjekkOK" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+      <xs:element name="valideringsfeil" minOccurs="0" maxOccurs="1" type="skjv:ValideringsfeilListe" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

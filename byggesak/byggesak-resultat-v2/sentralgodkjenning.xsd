@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" targetNamespace="http://www.be.no/xml/ns/byggesak/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="sentralgodkjenning">
+		<xs:annotation>
+			<xs:documentation>Sentral godkjenning.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sak" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="foretak" type="be:ForetakType" minOccurs="0"/>
+							<xs:element name="vedlegg" type="be:VedleggType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+						<xs:attribute name="soknadstype" type="be:SGSoknadstypeType">
+							<xs:annotation>
+								<xs:documentation>Søknadstype.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="saksbehandling" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="foretak" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="organisering" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="styringssystem" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="organisasjonsplanok" type="be:GodkjentMedBegrunnelseType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Organisasjonsplan funnet i orden?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="systemopplysningerok" type="be:GodkjentMedBegrunnelseType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Systemopplysninger funnet i orden?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="andresystemopplysningerok" type="be:GodkjentMedBegrunnelseType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Andre systemopplysninger funnet i orden?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="idref"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="kompetanse" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="referanseprosjekter" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="prosjekt" minOccurs="0" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="referanseprosjektetvurderttil" type="be:VurderingAvReferanseprosjektType" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>Referanseprosjektet er vurdert til.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="referanseprosjektbegrunnelse" type="xs:string" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>Beskriv hvorfor.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="idref"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="godkjenningsomrader" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="omrade" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="vurdering" type="be:VurderingAvGodkjenningsomraderType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Vurdering.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="vedtakstekst" type="xs:string" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Vedtakstekst.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="innvilgesnedjustert" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Innvilges i nedjustert tiltaksklasse...</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="1"/>
+																			<xs:enumeration value="2"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="idref"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="vedtak" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="styringssystem" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Styringssystem.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="godkjenningsomrader" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Godkjenningsområder.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="videresaksbehandling" type="be:VidereSaksbehandlingType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Videre saksbehandling.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="fagligvurderer" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Faglig vurderer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="kvalitetssikrer" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Kvalitetssikrer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="tidsfrist" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Tidsfrist.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Beskrivelse.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="statistikk" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Statistiske opplysninger om saksbehandlingen.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="saksbehandlingstid" type="xs:integer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Saksbehandlingstid i antall dager.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="saksadministrasjon" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="foretaketsgodkjenning" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Foretakets godkjenning.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="status" type="be:GodkjenningsstatusType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Status.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="vedtakdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Vedtak dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="godkjenttil" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Godkjent til.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="kontonummer" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Kontonummer.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="utstedtefakturaer" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Utstedte fakturaer.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="produsertdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Produsert dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="ordrenummer" type="xs:integer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Ordrenummer.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="arkiv" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="kommentarer" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Kommentarer.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="kommentar" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="nummer" type="xs:nonNegativeInteger" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Nummer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="saksbehandler" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Saksbehandler.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="registrertdato" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Registrert dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="kommentar" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Kommentar.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="oppgaver" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Oppgaver.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="oppgave" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="nummer" type="xs:nonNegativeInteger" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Nummer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="oppgavetype" type="be:VidereSaksbehandlingType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Oppgavetype.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="gittav" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Gitt av.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="fordelttil" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Fordelt til.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="registrertdato" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Registrert dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="utfortdato" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Utført dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Beskrivelse.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="milepeler" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Milepæler.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="milepel" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="nummer" type="xs:nonNegativeInteger" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Nummer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Beskrivelse.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="status" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Status.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="fullført" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Fullført dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="ansvarlig" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Ansvarlig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="frist" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Frist dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

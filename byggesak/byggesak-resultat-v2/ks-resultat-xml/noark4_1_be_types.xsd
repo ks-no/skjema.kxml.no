@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:types="http://www.arkivverket.no/Noark4-1-WS-WD/types" targetNamespace="http://www.arkivverket.no/Noark4-1-WS-WD/types" elementFormDefault="unqualified">
+	<xs:redefine schemaLocation="noark4_1_ws_wd_types.xsd">
+		<xs:complexType name="FilType">
+			<xs:complexContent>
+				<xs:extension base="types:FilType">
+					<xs:choice>
+						<xs:element name="ref" type="xs:anyURI"/>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:complexType name="NoarksakType">
+			<xs:annotation>
+				<xs:documentation>
+				Ref. NOARK-4 Norsk arkivsystem Versjon 4, Del II Tekniske spesifikasjoner Utdrag RIKSARKIVET 1999
+				Chapter: 14.2 Modul for arkivstyring
+				Sub Chapter: 14.2.1 Sak (NOARKSAK)
+			</xs:documentation>
+			</xs:annotation>
+			<xs:complexContent>
+				<xs:restriction base="types:NoarksakType">
+					<xs:sequence>
+						<xs:element name="saId" type="xs:string" minOccurs="0"/>
+						<xs:element name="saSaar" type="xs:string" minOccurs="0"/>
+						<xs:element name="saSeknr" type="xs:string" minOccurs="0"/>
+						<xs:element name="saPapir" type="xs:string" minOccurs="0"/>
+						<xs:element name="saDato" type="xs:string" minOccurs="0"/>
+						<xs:element name="saTittel" type="xs:string"/>
+						<xs:element name="saU1" type="xs:string" minOccurs="0"/>
+						<xs:element name="saStatus" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="R"/>
+									<xs:enumeration value="B"/>
+									<xs:enumeration value="T"/>
+									<xs:enumeration value="M"/>
+									<xs:enumeration value="K"/>
+									<xs:enumeration value="C"/>
+									<xs:enumeration value="V"/>
+									<xs:enumeration value="A"/>
+									<xs:enumeration value="X"/>
+									<xs:enumeration value="U"/>
+									<xs:enumeration value="KU"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="saArkdel" type="xs:string" minOccurs="0"/>
+						<xs:element name="saType" type="xs:string" minOccurs="0"/>
+						<xs:element name="saJenhet" type="xs:string" minOccurs="0"/>
+						<xs:element name="saTgkode" type="xs:string" minOccurs="0"/>
+						<xs:element name="saUoff" type="xs:string" minOccurs="0"/>
+						<xs:element name="saBevtid" type="xs:string" minOccurs="0"/>
+						<xs:element name="saKasskode" type="xs:string" minOccurs="0"/>
+						<xs:element name="saKassdato" type="xs:string" minOccurs="0"/>
+						<xs:element name="saProsjekt" type="xs:string" minOccurs="0"/>
+						<xs:element name="saOfftittel" type="xs:string" minOccurs="0"/>
+						<xs:element name="saAdmkort" type="xs:string" minOccurs="0"/>
+						<xs:element name="saAdmbet" type="xs:string" minOccurs="0"/>
+						<xs:element name="saAnsvinit" type="xs:string" minOccurs="0"/>
+						<xs:element name="saAnsvnavn" type="xs:string" minOccurs="0"/>
+						<xs:element name="saTggruppnavn" type="xs:string" minOccurs="0"/>
+						<xs:element name="saEksternNokkel" type="types:EksternNokkelType" minOccurs="0"/>
+						<xs:element name="klassering" type="types:KlasseringType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="sakspart" type="types:SakspartType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="journpost" type="types:JournpostType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="tilleggsinfo" type="types:TilleggsinfoType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:restriction>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+</xs:schema>

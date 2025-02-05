@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/felles/borger" xmlns:bgr="http://skjema.kxml.no/felles/borger" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" elementFormDefault="qualified" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" xmlns:fellesadressens="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:felleskontaktns="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:43:33-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Adresse/xml.schema/2012.01.31/giFellesAdresse20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kontakt/xml.schema/2012.01.31/giFellesKontakt20120131.xsd" />
+  <xs:element name="Adresseperiode" type="bgr:AdresseperiodeType" />
+  <xs:complexType name="AdresseperiodeListe">
+    <xs:sequence>
+      <xs:element name="adresseperiode" type="bgr:AdresseperiodeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AdresseperiodeType">
+    <xs:annotation>
+      <xs:documentation>Utvider EnkelAdresse med mulighet for å angi når en adresse er gyldig</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="fellesadressens:EnkelAdresse">
+        <xs:sequence>
+          <xs:element name="gyldigfra" minOccurs="0" maxOccurs="1" type="xs:date" />
+          <xs:element name="gyldigtil" minOccurs="0" maxOccurs="1" type="xs:date" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Borger" type="bgr:BorgerType" />
+  <xs:complexType name="BorgerListe">
+    <xs:sequence>
+      <xs:element name="borger" type="bgr:BorgerType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BorgerType">
+    <xs:complexContent>
+      <xs:extension base="felleskontaktns:Person">
+        <xs:sequence>
+          <xs:element name="spraak" minOccurs="0" maxOccurs="1" type="felles:SpraakType" />
+          <xs:element name="foedselsdato" minOccurs="0" maxOccurs="1" type="xs:date" />
+          <xs:element name="personrelasjoner" minOccurs="0" maxOccurs="1" type="bgr:PersonrelasjonListe" />
+          <xs:element name="statsborgerskap" minOccurs="0" maxOccurs="1" type="bgr:StatsborgerskapListe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Personrelasjon" type="bgr:PersonrelasjonType" />
+  <xs:complexType name="PersonrelasjonListe">
+    <xs:sequence>
+      <xs:element name="personrelasjon" type="bgr:PersonrelasjonType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PersonrelasjonType">
+    <xs:sequence>
+      <xs:element name="rolle" minOccurs="1" maxOccurs="1" type="bgr:RolleType" />
+      <xs:element name="personid" minOccurs="1" maxOccurs="1" type="felleskontaktns:Personidentifikator" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rolle" type="bgr:RolleType" />
+  <xs:complexType name="RolleListe">
+    <xs:sequence>
+      <xs:element name="rolle" type="bgr:RolleType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RolleType">
+    <xs:annotation>
+      <xs:documentation>Benyttes for å angi hvilket slektskap eller annet forhold det er mellom barn og foreldre.
+
+Se kodeliste på http://www.kxml.no/Kodeliste/e247e55a-265c-4fc6-bbca-532202949e59</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Sivilstand" type="bgr:SivilstandType" />
+  <xs:complexType name="SivilstandListe">
+    <xs:sequence>
+      <xs:element name="sivilstand" type="bgr:SivilstandType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SivilstandType">
+    <xs:annotation>
+      <xs:documentation>viser til en persons forhold til en eller flere andre personer
+
+Se kodeliste på http://www.kxml.no/Kodeliste/d7b23f30-4dac-44cb-96e1-c596d1276ef5 </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Statsborgerskap" type="bgr:StatsborgerskapType" />
+  <xs:complexType name="StatsborgerskapListe">
+    <xs:sequence>
+      <xs:element name="statsborgerskap" type="bgr:StatsborgerskapType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StatsborgerskapType">
+    <xs:annotation>
+      <xs:documentation>Kodeliste for statsborgerskap som en borger kan ha. Basert på folkeregisteret og ssb kodeliste. Statsborgerskap annerkjent av Norge.
+
+Se kodeliste på http://www.kxml.no/Kodeliste/650d2864-3b39-4fa8-b37d-1cd132e8b847</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

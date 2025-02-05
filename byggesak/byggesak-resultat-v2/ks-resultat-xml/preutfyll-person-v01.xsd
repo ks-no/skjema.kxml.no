@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			xmlns="http://w3.brreg.no/seres/ks/skjemaresultat/felles/preutfyll-person-v01" 
+			xmlns:gd="http://w3.brreg.no/seres/ks/skjemaresultat/felles/grunndata-v01" 
+			xmlns:brg="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" 
+			xmlns:fls="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" 
+			targetNamespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/preutfyll-person-v01" 
+			attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+	<xsd:annotation>
+		<xsd:documentation>Data i dette dokumentet representerer en familie og er typisk resultatet av et registeroppslag. 
+		Gitt et fødselsnummer vil et slikt oppslag returnere en liste med de foresatte (med rolleangivelse; f.eks, mor, far eller annen familie), 
+		og en liste med barn tilknyttet fødselsnummeret som ble bruket ved oppslag. Standarden beskriver ikke semantikken knyttet til slike oppslag, 
+		men representerer en måte å beskrive resultatet av et slikt oppslag.
+		 </xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/grunndata-v01" schemaLocation="grunndata-v01.xsd"/>
+	<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/borger-v01" schemaLocation="borger-v01.xsd"/>
+	<xsd:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" schemaLocation="felles-v01.xsd"/>
+
+	<xsd:element name="data">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="metadata" type="fls:PreutfyllMetadata">
+					<xsd:annotation>
+						<xsd:documentation>Metadata for dokumentet</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="foresatte" type="brg:Foresatte" minOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>Liste med foresatte.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="barn-liste" type="BarnListe">
+					<xsd:annotation>
+						<xsd:documentation>Liste med barn</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="BarnListe">
+
+		<xsd:sequence>
+
+			<xsd:element name="barn" type="brg:Borger" maxOccurs="unbounded" minOccurs="0"/>
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+</xsd:schema>

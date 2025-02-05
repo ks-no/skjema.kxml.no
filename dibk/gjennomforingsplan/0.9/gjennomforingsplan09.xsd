@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dibk="http://skjema.kxml.no/dibk/gjennomforingsplan/0.9" xmlns:seres="http://seres.no/xsd/forvaltningsdata" xmlns:fiks="http://skjema.kxml.no/metadata" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" targetNamespace="http://skjema.kxml.no/dibk/gjennomforingsplan/0.9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>
+			<xs:attribute name="XSLT-skriptnavn" fixed="METATRANS_SERES_XSD_GEN"/>
+			<xs:attribute name="XSD-generatorversjon" fixed="2.0.13"/>
+			<xs:attribute name="XSLT-prosessor" fixed="SAXON versjon 9.1.0.7"/>
+			<xs:attribute name="generert" fixed="02.03.2016 13.45.13"/>
+			<xs:attribute name="navneromprefix" fixed="http://seres.no/xsd"/>
+			<xs:attribute name="namespace" fixed="http://skjema.kxml.no/dibk/gjennomforingsplan/0.9"/>
+			<xs:attribute name="meldingsnavn" fixed="Melding"/>
+			<xs:attribute name="domenenavn" fixed="DiBK"/>
+			<xs:attribute name="modellnavn" fixed="MeldingType"/>
+			<xs:attribute name="metamodellversjon" fixed="1.0"/>
+			<xs:attribute name="guid" fixed="true"/>
+			<xs:attribute name="orid" fixed="true"/>
+			<xs:attribute name="nillable" fixed="true"/>
+			<xs:attribute name="tillat-gjenbruk" fixed="true"/>
+			<xs:attribute name="elementtype" fixed="true"/>
+			<xs:attribute name="forvaltningsdata" fixed="true"/>
+			<xs:attribute name="forvaltningsdata-navnerom" fixed="http://seres.no/xsd/forvaltningsdata"/>
+			<xs:attribute name="særnorske-bokstaver-i-navn" fixed="false"/>
+			<xs:attribute name="ft_guid_som_attributt" fixed="false"/>
+			<xs:attribute name="sem-ref" fixed="true"/>
+			<xs:attribute name="kodebibliotek" fixed="false"/>
+			<xs:attribute name="språk" fixed="no"/>
+			<xs:attribute name="XSD-variant" fixed="Altinn"/>
+			<xs:attribute name="XSD-transformatorversjon" fixed="1.2"/>
+		</xs:documentation>
+	</xs:annotation>
+	<!-- Generert av MetaTrans(1.1.0.0) - 02.03.2016 13.45.13-->
+	<xs:element name="Kode" type="dibk:KodeType"/>
+	<xs:complexType name="KodeListe">
+		<xs:sequence>
+			<xs:element name="kode" type="dibk:KodeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KodeType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_">
+		<xs:sequence>
+			<xs:element name="kodeverdi" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="1"/>
+			<xs:element name="kodebeskrivelse" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="2"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Eiendom" type="dibk:EiendomType"/>
+	<xs:complexType name="EiendomListe">
+		<xs:sequence>
+			<xs:element name="eiendom" type="dibk:EiendomType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EiendomType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_67661370-9B4D-4abe-A756-D068273A2132">
+		<xs:sequence>
+			<xs:element name="eiendomsidentifikasjon" type="dibk:MatrikkelnummerType" minOccurs="1" maxOccurs="1" seres:orid="59638"/>
+			<xs:element name="adresse" type="dibk:EnkelAdresseType" minOccurs="1" maxOccurs="1" seres:orid="59639"/>
+			<xs:element name="bygningsnummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59640"/>
+			<xs:element name="bolignummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59641"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EnkelAdresse" type="dibk:EnkelAdresseType"/>
+	<xs:complexType name="EnkelAdresseListe">
+		<xs:sequence>
+			<xs:element name="enkeladresse" type="dibk:EnkelAdresseType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnkelAdresseType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_4CA5A6AA-206B-4e6f-835F-17D02F20A7AE">
+		<xs:sequence>
+			<xs:element name="adresselinje1" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59626"/>
+			<xs:element name="adresselinje2" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59627"/>
+			<xs:element name="adresselinje3" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59628"/>
+			<xs:element name="postnr" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59629"/>
+			<xs:element name="poststed" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59630"/>
+			<xs:element name="landkode" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59631"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Foretak" type="dibk:ForetakType"/>
+	<xs:complexType name="ForetakListe">
+		<xs:sequence>
+			<xs:element name="foretak" type="dibk:ForetakType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ForetakType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_5C2034AD-6DED-4c32-BD4D-F31EB92A9A65">
+		<xs:complexContent>
+			<xs:extension base="dibk:PartType">
+				<xs:sequence>
+					<xs:element name="kontaktperson" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59636"/>
+					<xs:element name="harSentralGodkjenning" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59637"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Gjennomfoeringsplan" type="dibk:GjennomfoeringsplanType"/>
+	<xs:complexType name="GjennomfoeringsplanListe">
+		<xs:sequence>
+			<xs:element name="gjennomfoeringsplan" type="dibk:GjennomfoeringsplanType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GjennomfoeringsplanType" seres:elementtype="Meldingsmodell" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_348EDE18-47B5-455d-857F-FA61C0C9AE20">
+		<xs:sequence>
+			<xs:element name="soeknadsid" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59620"/>
+			<xs:element name="byggesaksid" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59621"/>
+			<xs:element name="eiendomByggested" type="dibk:EiendomListe" minOccurs="1" maxOccurs="1" seres:orid="59622"/>
+			<xs:element name="kommunensSaksnummer" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59623"/>
+			<xs:element name="gjennomfoeringsplan" type="dibk:GjennomfoeringsplanAnsvarsomraadeListe" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59624"/>
+			<xs:element name="ansvarligSoeker" type="dibk:PartType" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59625"/>
+		</xs:sequence>
+		<xs:attribute name="dataFormatProvider" type="xs:string" use="required" fixed="KXML"/>
+		<xs:attribute name="dataFormatId" type="xs:string" use="required" fixed="1"/>
+		<xs:attribute name="dataFormatVersion" type="xs:string" use="required" fixed="1"/>
+	</xs:complexType>
+	<xs:element name="GjennomfoeringsplanAnsvarsomraade" type="dibk:GjennomfoeringsplanAnsvarsomraadeType"/>
+	<xs:complexType name="GjennomfoeringsplanAnsvarsomraadeListe">
+		<xs:sequence>
+			<xs:element name="gjennomfoeringsplanansvarsomraade" type="dibk:GjennomfoeringsplanAnsvarsomraadeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GjennomfoeringsplanAnsvarsomraadeType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_E48DCCE6-1025-42e7-8500-3661D43603FC">
+		<xs:sequence>
+			<xs:element name="fagomraade" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59642"/>
+			<xs:element name="ansvarsomraadet" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59643"/>
+			<xs:element name="tiltaksklasse" type="dibk:KodeType" minOccurs="1" maxOccurs="1" fiks:codelist="http://skjema.geonorge.no/legg_inn_riktig_url" seres:orid="59644"/>
+			<xs:element name="foretak" type="dibk:ForetakType" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59645"/>
+			<xs:element name="samsvarKontrollPlanlagtVedRammetillatelse" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59646"/>
+			<xs:element name="samsvarKontrollPlanlagtVedIgangsettingstillatelse" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59647"/>
+			<xs:element name="samsvarKontrollPlanlagtVedMidlertidigBrukstillatelse" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59648"/>
+			<xs:element name="samsvarKontrollPlanlagtVedFerdigattest" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59649"/>
+			<xs:element name="samsvarKontrollForeliggerVedRammetillatelse" type="xs:date" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59650"/>
+			<xs:element name="samsvarKontrollForeliggerVedIgangsettingstillatelse" type="xs:date" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59651"/>
+			<xs:element name="samsvarKontrollForeliggerVedMidlertidigBrukstillatelse" type="xs:date" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59652"/>
+			<xs:element name="samsvarKontrollForeliggerVedFerdigattest" type="xs:date" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59653"/>
+			<xs:element name="ansvarsomraadetAvsluttet" type="xs:boolean" minOccurs="1" maxOccurs="1" seres:orid="59654"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Part" type="dibk:PartType"/>
+	<xs:complexType name="PartListe">
+		<xs:sequence>
+			<xs:element name="part" type="dibk:PartType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_E5320FE1-DD9F-43df-91E7-F3DCB2088B8A">
+		<xs:sequence>
+			<xs:element name="partstype" type="dibk:KodeType" minOccurs="1" maxOccurs="1" fiks:codelist="http://skjema.geonorge.no/legg_inn_riktig_url" seres:orid="59655"/>
+			<xs:element name="foedselsnummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59656"/>
+			<xs:element name="organisasjonsnummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59657"/>
+			<xs:element name="navn" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59658"/>
+			<xs:element name="adresse" type="dibk:EnkelAdresseType" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59659"/>
+			<xs:element name="telefonnummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59660"/>
+			<xs:element name="mobilnummer" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59661"/>
+			<xs:element name="epost" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59662"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Matrikkelnummer" type="dibk:MatrikkelnummerType"/>
+	<xs:complexType name="MatrikkelnummerListe">
+		<xs:sequence>
+			<xs:element name="matrikkelnummer" type="dibk:MatrikkelnummerType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MatrikkelnummerType" seres:guid="http://kommit.metakat.no/Objekttype/Index/EAID_1E9CAB69-08B9-4d79-A29E-87779547E679">
+		<xs:sequence>
+			<xs:element name="kommunenummer" type="xs:string" minOccurs="1" maxOccurs="1" seres:orid="59615"/>
+			<xs:element name="gaardsnummer" type="xs:integer" minOccurs="1" maxOccurs="1" seres:orid="59616"/>
+			<xs:element name="bruksnummer" type="xs:integer" minOccurs="1" maxOccurs="1" seres:orid="59617"/>
+			<xs:element name="festenummer" type="xs:integer" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59618"/>
+			<xs:element name="seksjonsnummer" type="xs:integer" nillable="true" minOccurs="0" maxOccurs="1" seres:orid="59619"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

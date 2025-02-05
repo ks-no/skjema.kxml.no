@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Skjematjenester" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+  <!--Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:19:52-->
+  <wsdl:types>
+    <xs:schema targetNamespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" xmlns:arkivfellesns="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:arkivkjernens="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31" xmlns:arkivdokumentns="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31">
+      <xs:include schemaLocation="skjema-v2.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Felles/xml.schema/2012.01.31/giArkivFelles20120131.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Kjerne/xml.schema/2012.01.31/giArkivKjerne20120131.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Arkiv/Dokument/xml.schema/2012.01.31/giArkivDokument20120131.xsd" />
+      <xs:element name="KvittereForMottak">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="kvittering" type="skj:SkjemakvitteringType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="KvittereForMottakResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HentNyeSoeknader">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HentNyeSoeknaderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="skj:SoeknadsIdListe" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HentSoeknad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="soeknadsid" type="skj:SoeknadsIdType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HentSoeknadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="skj:SkjemaresultatType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SystemFaultMessage">
+    <wsdl:part name="fault" element="fellestekniskns:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="KvittereForMottakMessage">
+    <wsdl:part name="parameters" element="skj:KvittereForMottak" />
+  </wsdl:message>
+  <wsdl:message name="KvittereForMottakResponseMessage">
+    <wsdl:part name="parameters" element="skj:KvittereForMottakResponse" />
+  </wsdl:message>
+  <wsdl:message name="HentNyeSoeknaderMessage">
+    <wsdl:part name="parameters" element="skj:HentNyeSoeknader" />
+  </wsdl:message>
+  <wsdl:message name="HentNyeSoeknaderResponseMessage">
+    <wsdl:part name="parameters" element="skj:HentNyeSoeknaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="HentSoeknadMessage">
+    <wsdl:part name="parameters" element="skj:HentSoeknad" />
+  </wsdl:message>
+  <wsdl:message name="HentSoeknadResponseMessage">
+    <wsdl:part name="parameters" element="skj:HentSoeknadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SkjematjenesterPort">
+    <wsdl:operation name="KvittereForMottak">
+      <wsdl:input name="KvittereForMottakRequest" message="skj:KvittereForMottakMessage" />
+      <wsdl:fault name="SystemFault" message="skj:SystemFaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HentNyeSoeknader">
+      <wsdl:input name="HentNyeSoeknaderRequest" message="skj:HentNyeSoeknaderMessage" />
+      <wsdl:output name="HentNyeSoeknaderResponse" message="skj:HentNyeSoeknaderResponseMessage" />
+      <wsdl:fault name="SystemFault" message="skj:SystemFaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HentSoeknad">
+      <wsdl:input name="HentSoeknadRequest" message="skj:HentSoeknadMessage" />
+      <wsdl:output name="HentSoeknadResponse" message="skj:HentSoeknadResponseMessage" />
+      <wsdl:fault name="SystemFault" message="skj:SystemFaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SkjematjenesterSoap" type="skj:SkjematjenesterPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="KvittereForMottak">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/skjemaresultat/skjema-v2/#KvittereForMottak" />
+      <wsdl:input name="KvittereForMottakRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="HentNyeSoeknader">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/skjemaresultat/skjema-v2/#HentNyeSoeknader" />
+      <wsdl:input name="HentNyeSoeknaderRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HentNyeSoeknaderResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="HentSoeknad">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/skjemaresultat/skjema-v2/#HentSoeknad" />
+      <wsdl:input name="HentSoeknadRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HentSoeknadResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Skjematjenester">
+    <wsdl:port name="Skjematjenester" binding="skj:SkjematjenesterSoap">
+      <soap:address location="http://skjema.kxml.no/skjemaresultat/skjema-v2" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

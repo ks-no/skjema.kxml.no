@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/barnehage/preutfyll-skjema-v2" xmlns:bhpru="http://skjema.kxml.no/barnehage/preutfyll-skjema-v2" elementFormDefault="qualified" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:bgr="http://skjema.kxml.no/felles/borger" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:ov="http://skjema.kxml.no/oppvekst">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 11:06:15-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/borger" schemaLocation="http://skjema.kxml.no/felles/borger/borger-v2.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/oppvekst" schemaLocation="http://skjema.kxml.no/oppvekst/oppvekst-v2.xsd" />
+  <xs:simpleType name="OpptaksaarType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DETTEOPPTAKSAAR" />
+      <xs:enumeration value="NESTEOPPTAKSAAR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="OpptaksaarListe">
+    <xs:sequence>
+      <xs:element name="opptaksaar" type="bhpru:OpptaksaarType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Skjemadata" type="bhpru:SkjemadataType" />
+  <xs:complexType name="SkjemadataListe">
+    <xs:sequence>
+      <xs:element name="skjemadata" type="bhpru:SkjemadataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkjemadataType">
+    <xs:annotation>
+      <xs:documentation>Samler generelle data for preutfylling av en barnehagesøknad</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="enheter" minOccurs="0" maxOccurs="1" type="ov:OppvekstenhetListe" />
+      <xs:element name="spesielle-hensyn" minOccurs="0" maxOccurs="1" type="ov:FortrinnListe" />
+      <xs:element name="spraak" minOccurs="0" maxOccurs="1" type="felles:SpraakListe" />
+      <xs:element name="statsborgerskap" minOccurs="0" maxOccurs="1" type="bgr:StatsborgerskapListe" />
+    </xs:sequence>
+    <xs:attributeGroup ref="felles:PreutfyllMetadataType" />
+  </xs:complexType>
+</xs:schema>

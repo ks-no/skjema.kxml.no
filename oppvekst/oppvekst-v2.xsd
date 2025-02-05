@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/oppvekst" xmlns:ov="http://skjema.kxml.no/oppvekst" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" elementFormDefault="qualified" xmlns:fellesgeometrins="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" xmlns:bgr="http://skjema.kxml.no/felles/borger">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:43:17-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Geometri/xml.schema/2012.01.31/giFellesGeometri20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd" />
+  <xs:import namespace="http://skjema.kxml.no/felles/borger" schemaLocation="http://skjema.kxml.no/felles/borger/borger-v2.xsd" />
+  <xs:element name="Barn" type="ov:BarnType" />
+  <xs:complexType name="BarnListe">
+    <xs:sequence>
+      <xs:element name="barn" type="ov:BarnType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BarnType">
+    <xs:annotation>
+      <xs:documentation>Barn er et menneske som er i fasen mellom fødsel og pubertet. Den juridiske definisjonen av «barn» refererer generelt til personer som ikke har nådd myndighetsalder.
+
+I konteksten av barnopplysninger skal
+"Borger.spraak" forstås som morsmål</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="bgr:BorgerType">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Oppvekstenhet" type="ov:OppvekstenhetType" />
+  <xs:complexType name="OppvekstenhetListe">
+    <xs:sequence>
+      <xs:element name="oppvekstenhet" type="ov:OppvekstenhetType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OppvekstenhetType">
+    <xs:annotation>
+      <xs:documentation>En enhet er f.eks en barnehage, barnepark, skole eller avdeling. I tillegg til enheten angis også hvilken sone enheten tilhører.
+Kan f.eks. benyttes i kommuner som er delt i geografiske soner.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence>
+          <xs:element name="posisjon" minOccurs="0" maxOccurs="1" type="fellesgeometrins:Punkt" />
+          <xs:element name="enhetinformasjon" minOccurs="0" maxOccurs="1" type="xs:anyURI" />
+          <xs:element name="sone" minOccurs="0" maxOccurs="1" type="ov:SoneType" />
+          <xs:element name="omfang" minOccurs="0" maxOccurs="1" type="ov:OmfangListe" />
+          <xs:element name="spesielle-hensyn" minOccurs="0" maxOccurs="1" type="ov:FortrinnListe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Familie" type="ov:FamilieType" />
+  <xs:complexType name="FamilieListe">
+    <xs:sequence>
+      <xs:element name="familie" type="ov:FamilieType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FamilieType">
+    <xs:annotation>
+      <xs:documentation>En familie er en institusjon eller et hushold som består av en gruppe individer som er knyttet sammen gjennom arv (demonstrert eller stipulert) fra felles aner, ekteskap, partnerskap eller adopsjon.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="barn" minOccurs="0" maxOccurs="1" type="ov:BarnListe" />
+      <xs:element name="foresatte" minOccurs="0" maxOccurs="1" type="ov:ForesattListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Foresatt" type="ov:ForesattType" />
+  <xs:complexType name="ForesattListe">
+    <xs:sequence>
+      <xs:element name="foresatt" type="ov:ForesattType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForesattType">
+    <xs:annotation>
+      <xs:documentation>Kan være foreldre eller en med juridisk foreldrerett</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="bgr:BorgerType">
+        <xs:sequence>
+          <xs:element name="bor-med-barnet" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+          <xs:element name="sivilstand" minOccurs="1" maxOccurs="1" type="bgr:SivilstandType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Fortrinn" type="ov:FortrinnType" />
+  <xs:complexType name="FortrinnListe">
+    <xs:sequence>
+      <xs:element name="fortrinn" type="ov:FortrinnType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FortrinnType">
+    <xs:annotation>
+      <xs:documentation>Fortrinn er forhold som skal vurderes ved behandling av søknaden med tanke på fortrinn ved plasstildeling. Fortrinnet består av en id for å identifisere fortrinnet i fagsystemet, og beskrivende tekst.
+
+Kodene defineres i fagsystemet.
+
+Se evt forslag her http://www.kxml.no/Kodeliste/186883a9-8809-4c90-b528-910ae92f24f4</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Omfang" type="ov:OmfangType" />
+  <xs:complexType name="OmfangListe">
+    <xs:sequence>
+      <xs:element name="omfang" type="ov:OmfangType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OmfangType">
+    <xs:annotation>
+      <xs:documentation>Omfang er entydig bestemt av omfang-id. Hvert unike omfang-id tilsvarer et konkret omfang som er bestemt av fagsystemet. F.eks kan et fagsystem definiere:
+			1:100% plass
+			2:50% plass ettermiddag
+			3:50% plass formiddag
+			4:50% plass like uker
+			5:50% plass ulike uker
+
+I tillegg til omfang-id og omfang beskrivelse kan det spesifiseres hvilke ukedager som er aktuelle, og hvilket alderstrinn omfanget gjelder.
+Da omfang benyttes i preutfyll-barnehage muliggjør dette at skjermdialog kan filtrere ut omfang som er uaktuelle.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="omfang-id" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="omfang-tekst" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="omfang-fra-alder" minOccurs="0" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="6" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="omfang-til-alder" minOccurs="0" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="6" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="omfang-info" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="omfang-timer-per-uke" minOccurs="0" maxOccurs="1" type="xs:integer" />
+      <xs:element name="ukedager" minOccurs="0" maxOccurs="1" type="felles:UkedagListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sone" type="ov:SoneType" />
+  <xs:complexType name="SoneListe">
+    <xs:sequence>
+      <xs:element name="sone" type="ov:SoneType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SoneType">
+    <xs:annotation>
+      <xs:documentation>Sone er en geografisk inndeling av enheter. Det kan feks være skolekrets, bydel, mm</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence>
+          <xs:element name="enheter" minOccurs="0" maxOccurs="1" type="ov:OppvekstenhetListe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Plass" type="ov:PlassType" />
+  <xs:complexType name="PlassListe">
+    <xs:sequence>
+      <xs:element name="plass" type="ov:PlassType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PlassType">
+    <xs:annotation>
+      <xs:documentation>Angir ønsker om plassering, slik som hvilken enhet, hvilket omfang, og prioritering som ønskes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="prioritet" minOccurs="0" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1" />
+            <xs:maxInclusive value="20" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="enhet" minOccurs="1" maxOccurs="1" type="ov:OppvekstenhetType" />
+      <xs:element name="omfang" minOccurs="1" maxOccurs="1" type="ov:OmfangType" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

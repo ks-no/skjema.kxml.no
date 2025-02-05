@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:fellesns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" xmlns:kodelistens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" xmlns:s2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/service/kodeliste" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:ns2="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" xmlns:ns3="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" xmlns:ns4="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:ns5="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/eierforhold" xmlns:ns6="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommunetillegg" xmlns:ns7="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" xmlns:ns8="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" xmlns:ns9="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/grunnforurensing" xmlns:ns10="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kulturminne" xmlns:ns11="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" xmlns:ns12="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rapport" targetNamespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kodeliste" elementFormDefault="qualified" version="1.0 - [Matrikkelen v.2.1.1]">
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/felles" schemaLocation="felles.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="bygning.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelenhet" schemaLocation="matrikkelenhet.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="person.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="adresse.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/eierforhold"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/eierforhold" schemaLocation="eierforhold.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommunetillegg"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommunetillegg" schemaLocation="kommunetillegg.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/matrikkelsok" schemaLocation="matrikkelsok.xsd"/>
+	<!--<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune"/>-->
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kommune" schemaLocation="kommune.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/grunnforurensing" schemaLocation="grunnforurensing.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/kulturminne" schemaLocation="kulturminne.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/sefrak" schemaLocation="sefrak.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/rapport" schemaLocation="rapport.xsd"/>
+	<!-- ================================================= -->
+	<!-- Package: kodeliste -->
+	<!-- ================================================= -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAlleKodelisterRequest  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAlleKodelisterRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="matrikkelContext" type="fellesns:MatrikkelContext"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Class: FindAlleKodelisterResponse  -->
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<xs:element name="FindAlleKodelisterResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="koder" type="fellesns:Kode" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

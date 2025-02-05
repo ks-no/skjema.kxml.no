@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" targetNamespace="http://www.be.no/xml/ns/byggesak/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:element name="systemadministrasjon">
+		<xs:annotation>
+			<xs:documentation>Systemadminstrasjon.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="brukere" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="bruker" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="unikid" type="be:StringWithoutBlanksType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Unik ID.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="opprettetdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Opprettet dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="etternavn" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Etternavn.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="mellomnavn" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Mellomnavn.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="fornavn" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Fornavn.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="brukernavn" type="be:StringWithoutBlanksType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Brukernavn.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="passord" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Passord.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="tilhorer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Tilhører administrativ enhet.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="rolle" type="be:SaksbehandlerRolleType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Rolle.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="andrefunksjoner" type="be:SaksbehandlerFunksjonType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Andre funksjoner.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="stillingsprosent" type="be:StillingsprosentType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Stillingsprosent.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="ansettelsesforhold" type="be:SaksbehandlerAnsettelsesforholdType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Ansettelsesforhold.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="permisjontildato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Hvis i permisjon, til dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="sluttetdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Hvis sluttet, sluttet dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="behandlersaker" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Behandler følgende saker.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sakstype" type="be:SakstypeType" minOccurs="0" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Sakstype.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="epostokonomiansvarlig" type="be:EmailAddressType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>E-post til økonomiansvarlig.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="endrenedtrekkslister" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="nedtrekksliste" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="administrativenhet" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Navn på administrativ enhet.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="opprettetdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Opprettet dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="nedlagtdato" type="xs:date" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Nedlagt dato.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

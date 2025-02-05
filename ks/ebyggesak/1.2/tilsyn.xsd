@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/byggesak/1.2" xmlns:tls="http://skjema.kxml.no/byggesak/1.2" elementFormDefault="qualified">
+  <!-- Generert av MetaTrans(1.1.0.0) - 11.08.2017 16.13.20-->
+  <xs:element name="Aktivitet" type="tls:AktivitetType" />
+  <xs:complexType name="AktivitetListe">
+    <xs:sequence>
+      <xs:element name="aktivitet" type="tls:AktivitetType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AktivitetType">
+    <xs:sequence>
+      <xs:element name="typeSjekk" minOccurs="1" maxOccurs="1" type="tls:SjekkpunkttypeType" />
+      <xs:element name="status" minOccurs="1" maxOccurs="1" type="tls:AktivitetsstatusType" />
+      <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="frist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+      <xs:element name="kommentar" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="ansvarlig" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="dokumentkategori" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="referanseJournalpost" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SystemIDType" />
+      <xs:element name="referanseDokument" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SystemIDType" />
+      <xs:element name="milepel" minOccurs="1" maxOccurs="1" type="tls:MilepelType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Aktivitetsstatus" type="tls:AktivitetsstatusType" />
+  <xs:complexType name="AktivitetsstatusType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ansvarsomraade" type="tls:AnsvarsomraadeType" />
+  <xs:complexType name="AnsvarsomraadeListe">
+    <xs:sequence>
+      <xs:element name="ansvarsomraade" type="tls:AnsvarsomraadeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AnsvarsomraadeType">
+    <xs:sequence>
+      <xs:element name="fagomraade" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="funksjon" minOccurs="1" maxOccurs="1" type="tls:FunksjonType" />
+      <xs:element name="arbeidsomraade" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="tiltaksklasse" minOccurs="1" maxOccurs="1" type="tls:TiltaksklasseType" />
+      <xs:element name="harSentralGodkjenning" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+      <xs:element name="foretak" minOccurs="1" maxOccurs="1" type="tls:ForetakType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BakgrunnForTilsyn" type="tls:BakgrunnForTilsynType" />
+  <xs:complexType name="BakgrunnForTilsynListe">
+    <xs:sequence>
+      <xs:element name="bakgrunnfortilsyn" type="tls:BakgrunnForTilsynType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BakgrunnForTilsynType">
+    <xs:sequence>
+      <xs:element name="kategori" minOccurs="1" maxOccurs="1" type="tls:BakgrunnTilsynTypeType" />
+      <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BakgrunnTilsynType" type="tls:BakgrunnTilsynTypeType" />
+  <xs:complexType name="BakgrunnTilsynTypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Deltaker" type="tls:DeltakerType" />
+  <xs:complexType name="DeltakerListe">
+    <xs:sequence>
+      <xs:element name="deltaker" type="tls:DeltakerType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeltakerType">
+    <xs:sequence>
+      <xs:element name="rolle" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="navn" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="organisasjonsnummer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="foretak" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EnkelAdresse" type="tls:EnkelAdresseType" />
+  <xs:complexType name="EnkelAdresseListe">
+    <xs:sequence>
+      <xs:element name="enkeladresse" type="tls:EnkelAdresseType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EnkelAdresseType">
+    <xs:sequence>
+      <xs:element name="adresselinje1" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="adresselinje2" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="adresselinje3" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="postnr" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="poststed" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="landkode" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fase" type="tls:FaseType" />
+  <xs:complexType name="FaseListe">
+    <xs:sequence>
+      <xs:element name="fase" type="tls:FaseType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FaseType">
+    <xs:sequence>
+      <xs:element name="fasenavn" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Foretak" type="tls:ForetakType" />
+  <xs:complexType name="ForetakListe">
+    <xs:sequence>
+      <xs:element name="foretak" type="tls:ForetakType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForetakType">
+    <xs:sequence>
+      <xs:element name="organisasjonsnummer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="navn" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="adresse" minOccurs="0" maxOccurs="1" nillable="true" type="tls:EnkelAdresseType" />
+      <xs:element name="kontaktperson" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="telefonnummer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="mobilnummer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="epost" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="harSentralGodkjenning" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+      <xs:element name="tilsynskandidat" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+      <xs:element name="registrert" minOccurs="1" maxOccurs="1" type="xs:dateTime" />
+      <xs:element name="tilsynskandidatOppdatert" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+      <xs:element name="merknad" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="tilsyn" minOccurs="0" maxOccurs="1" nillable="true" type="tls:TilsynListe" />
+      <xs:element name="ansvarsomraade" minOccurs="0" maxOccurs="1" nillable="true" type="tls:AnsvarsomraadeListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Funksjon" type="tls:FunksjonType" />
+  <xs:complexType name="FunksjonType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Gebyrlinje" type="tls:GebyrlinjeType" />
+  <xs:complexType name="GebyrlinjeListe">
+    <xs:sequence>
+      <xs:element name="gebyrlinje" type="tls:GebyrlinjeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GebyrlinjeType">
+    <xs:sequence>
+      <xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:integer" />
+      <xs:element name="artikkelnummer" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="beskrivelse" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="antall" minOccurs="1" maxOccurs="1" type="xs:double" />
+      <xs:element name="enhet" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="pris" minOccurs="1" maxOccurs="1" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Milepel" type="tls:MilepelType" />
+  <xs:complexType name="MilepelListe">
+    <xs:sequence>
+      <xs:element name="milepel" type="tls:MilepelType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MilepelType">
+    <xs:sequence>
+      <xs:element name="systemId" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="kategori" minOccurs="1" maxOccurs="1" type="tls:MilepeltypeType" />
+      <xs:element name="frist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+      <xs:element name="utfoert" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+      <xs:element name="journaldato" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+      <xs:element name="intern" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+      <xs:element name="referanseJournalpost" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SystemIDType" />
+      <xs:element name="referanseDokument" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SystemIDType" />
+      <xs:element name="faseFoerMilepel" minOccurs="0" maxOccurs="1" nillable="true" type="tls:FaseType" />
+      <xs:element name="faseEtterMilepel" minOccurs="0" maxOccurs="1" nillable="true" type="tls:FaseType" />
+      <xs:element name="prosess" minOccurs="1" maxOccurs="1" type="tls:ProsessType" />
+      <xs:element name="sjekkliste" minOccurs="0" maxOccurs="1" nillable="true" type="tls:AktivitetListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Milepeltype" type="tls:MilepeltypeType" />
+  <xs:complexType name="MilepeltypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prosess" type="tls:ProsessType" />
+  <xs:complexType name="ProsessListe">
+    <xs:sequence>
+      <xs:element name="prosess" type="tls:ProsessType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProsessType">
+    <xs:sequence>
+      <xs:element name="systemId" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="kategori" minOccurs="1" maxOccurs="1" type="tls:ProsesskategoriType" />
+      <xs:element name="antallUkerFrist" minOccurs="0" maxOccurs="1" nillable="true" type="xs:Integer" />
+      <xs:element name="prosesskoe" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="prosessteam" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="prosessansvarlig" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="gebyrunderlag" minOccurs="0" maxOccurs="1" nillable="true" type="tls:GebyrlinjeListe" />
+      <xs:element name="milepeler" minOccurs="0" maxOccurs="1" nillable="true" type="tls:MilepelListe" />
+      <xs:element name="tilsyn" minOccurs="1" maxOccurs="1" type="tls:TilsynType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prosesskategori" type="tls:ProsesskategoriType" />
+  <xs:complexType name="ProsesskategoriType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sanksjon" type="tls:SanksjonType" />
+  <xs:complexType name="SanksjonListe">
+    <xs:sequence>
+      <xs:element name="sanksjon" type="tls:SanksjonType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SanksjonType">
+    <xs:sequence>
+      <xs:element name="sanksjonstype" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SanksjonstyperType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sanksjonstyper" type="tls:SanksjonstyperType" />
+  <xs:complexType name="SanksjonstyperType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sjekkpunkttype" type="tls:SjekkpunkttypeType" />
+  <xs:complexType name="SjekkpunkttypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SystemIDType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:element name="Tilsyn" type="tls:TilsynType" />
+  <xs:complexType name="TilsynListe">
+    <xs:sequence>
+      <xs:element name="tilsyn" type="tls:TilsynType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TilsynType">
+    <xs:sequence>
+      <xs:element name="tilsynstype" minOccurs="1" maxOccurs="1" type="tls:TilsynstypeListe" />
+      <xs:element name="tilsynsomraade" minOccurs="1" maxOccurs="1" type="tls:TilsynsomraadeListe" />
+      <xs:element name="saksnummer" minOccurs="0" maxOccurs="1" nillable="true" type="arkivfellesns:Saksnummer" />
+      <xs:element name="tilsynsfoerer" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="foretatt" minOccurs="0" maxOccurs="1" nillable="true" type="xs:dateTime" />
+      <xs:element name="adresse" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="eiendom" minOccurs="0" maxOccurs="1" nillable="true" type="matrikkelfellesns:Matrikkelnummer" />
+      <xs:element name="kommentar" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="bakgrunn" minOccurs="0" maxOccurs="1" nillable="true" type="tls:BakgrunnForTilsynListe" />
+      <xs:element name="referanseByggesak" minOccurs="0" maxOccurs="1" nillable="true" type="arkivfellesns:SaksnummerListe" />
+      <xs:element name="deltakere" minOccurs="0" maxOccurs="1" nillable="true" type="tls:DeltakerListe" />
+      <xs:element name="konklusjonVurderingType" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="konklusjonVurdering" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="konklusjonOppfoelgingType" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="konklusjonOppfoelging" minOccurs="0" maxOccurs="1" nillable="true" type="xs:string" />
+      <xs:element name="avsluttetTilsyn" minOccurs="0" maxOccurs="1" nillable="true" type="xs:boolean" />
+      <xs:element name="avsluttet" minOccurs="0" maxOccurs="1" nillable="true" type="xs:date" />
+      <xs:element name="sanksjoner" minOccurs="0" maxOccurs="1" nillable="true" type="tls:SanksjonListe" />
+      <xs:element name="foretak" minOccurs="0" maxOccurs="1" nillable="true" type="tls:ForetakListe" />
+      <xs:element name="saksbehandling" minOccurs="0" maxOccurs="1" nillable="true" type="tls:ProsessListe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tilsynsomraade" type="tls:TilsynsomraadeType" />
+  <xs:complexType name="TilsynsomraadeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tilsynstype" type="tls:TilsynstypeType" />
+  <xs:complexType name="TilsynstypeType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tiltaksklasse" type="tls:TiltaksklasseType" />
+  <xs:complexType name="TiltaksklasseType">
+    <xs:sequence>
+      <xs:element name="kode" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

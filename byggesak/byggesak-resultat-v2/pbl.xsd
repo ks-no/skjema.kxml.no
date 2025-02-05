@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" xmlns:na4="http://www.arkivverket.no/Noark4-1-WS-WD/types" xmlns:na4felles="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" targetNamespace="http://www.be.no/xml/ns/byggesak/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:include schemaLocation="sentralgodkjenning.xsd"/>
+	<xs:include schemaLocation="byggesak.xsd"/>
+	<xs:import namespace="http://www.arkivverket.no/Noark4-1-WS-WD/types" schemaLocation="ks-resultat-xml\noark4_1_be_types.xsd"/>
+	<xs:import namespace="http://w3.brreg.no/seres/ks/skjemaresultat/felles/felles-v01" schemaLocation="ks-resultat-xml\felles-v01.xsd"/>
+	<xs:element name="result" type="be:Result"/>
+	<xs:complexType name="Result">
+		<xs:sequence>
+			<xs:element name="fagsystemdata">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element ref="be:sentralgodkjenning"/>
+						<xs:element ref="be:byggesak"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="arkivdata" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="noarksak" type="na4:NoarksakType" minOccurs="0"/>
+						<xs:element name="journpost" type="na4:JournpostType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="na4felles:KSResultAttributter"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Preutfyll-barnehageskjema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2" xmlns:bhpru="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+  <!--Generert av Metakat wsdl generator(0.8.0.0) - 25.07.2012 15:11:44-->
+  <wsdl:types>
+    <xs:schema targetNamespace="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2" xmlns:bhpru="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" xmlns:bgr="http://skjema.kxml.no/felles/borger" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:ov="http://skjema.kxml.no/oppvekst">
+      <xs:include schemaLocation="preutfyll-skjema-v2.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/felles/borger" schemaLocation="http://skjema.kxml.no/felles/borger/borger-v2.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/felles/felles-v2" schemaLocation="http://skjema.kxml.no/felles/felles-v2/felles-v2.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/oppvekst" schemaLocation="http://skjema.kxml.no/oppvekst/oppvekst-v2.xsd" />
+      <xs:element name="HentSkjemadata">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="opptaksaar" type="bhpru:OpptaksaarType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="kommunenr" type="xs:integer" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HentSkjemadataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="bhpru:SkjemadataType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SystemFaultMessage">
+    <wsdl:part name="fault" element="fellestekniskns:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="HentSkjemadataMessage">
+    <wsdl:part name="parameters" element="bhpru:HentSkjemadata" />
+  </wsdl:message>
+  <wsdl:message name="HentSkjemadataResponseMessage">
+    <wsdl:part name="parameters" element="bhpru:HentSkjemadataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Preutfyll-barnehageskjemaPort">
+    <wsdl:operation name="HentSkjemadata">
+      <wsdl:input name="HentSkjemadataRequest" message="bhpru:HentSkjemadataMessage" />
+      <wsdl:output name="HentSkjemadataResponse" message="bhpru:HentSkjemadataResponseMessage" />
+      <wsdl:fault name="SystemFault" message="bhpru:SystemFaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Preutfyll-barnehageskjemaSoap" type="bhpru:Preutfyll-barnehageskjemaPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HentSkjemadata">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2/#HentSkjemadata" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Preutfyll-barnehageskjema">
+    <wsdl:port name="Preutfyll-barnehageskjema" binding="bhpru:Preutfyll-barnehageskjemaSoap">
+      <soap:address location="http://skjema.kxml.no/skjemaresultat/barnehage/preutfyll-skjema-v2" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

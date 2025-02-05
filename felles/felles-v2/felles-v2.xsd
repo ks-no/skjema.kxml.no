@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/felles/felles-v2" xmlns:felles="http://skjema.kxml.no/felles/felles-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" elementFormDefault="qualified" xmlns:felleskodelistens="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31">
+  <!-- Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:43:47-->
+  <xs:import namespace="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Kodeliste/xml.schema/2012.01.31/giFellesKodeliste20120131.xsd" />
+  <xs:attributeGroup name="PreutfyllMetadataType">
+    <xs:annotation>
+      <xs:documentation>Brukes for å angi hvilke system og kunde preutfyllingsdata kommer fra.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="kildesystem" type="xs:string" />
+    <xs:attribute name="kildeorganisasjon" type="xs:string" />
+    <xs:attribute name="kommentar" type="xs:string" />
+    <xs:attribute name="opprettet" type="xs:dateTime" use="required" />
+  </xs:attributeGroup>
+  <xs:element name="Spraak" type="felles:SpraakType" />
+  <xs:complexType name="SpraakListe">
+    <xs:sequence>
+      <xs:element name="spraak" type="felles:SpraakType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpraakType">
+    <xs:annotation>
+      <xs:documentation>Angir språkkoder
+
+Se kodeliste på http://www.kxml.no/Kodeliste/d3080cff-884b-46e6-954f-395938e897c6</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="felleskodelistens:Kode">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="UkedagType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+      <xs:enumeration value="4" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="6" />
+      <xs:enumeration value="7" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UkedagListe">
+    <xs:sequence>
+      <xs:element name="ukedag" type="felles:UkedagType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

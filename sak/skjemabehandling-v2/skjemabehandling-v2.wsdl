@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Skjemabehandling" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://skjema.kxml.no/sak/skjemabehandling-v2" xmlns:skjb="http://skjema.kxml.no/sak/skjemabehandling-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+  <!--Generert av MetaTrans(0.9.0.0) - 06.09.2012 10:42:12-->
+  <wsdl:types>
+    <xs:schema targetNamespace="http://skjema.kxml.no/sak/skjemabehandling-v2" xmlns:skjb="http://skjema.kxml.no/sak/skjemabehandling-v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:skj="http://skjema.kxml.no/skjemaresultat/skjema-v2" xmlns:fellestekniskns="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31">
+      <xs:include schemaLocation="skjemabehandling-v2.xsd" />
+      <xs:import namespace="http://skjema.kxml.no/skjemaresultat/skjema-v2" schemaLocation="http://skjema.kxml.no/skjemaresultat/skjema-v2/skjema-v2.xsd" />
+      <xs:import namespace="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31" schemaLocation="http://rep.geointegrasjon.no/Felles/Teknisk/xml.schema/2012.01.31/giFellesTeknisk20120131.xsd" />
+      <xs:element name="NySkjemabehandling">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="resultat" type="skj:SkjemaresultatType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NySkjemabehandlingResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SystemFaultMessage">
+    <wsdl:part name="fault" element="fellestekniskns:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="NySkjemabehandlingMessage">
+    <wsdl:part name="parameters" element="skjb:NySkjemabehandling" />
+  </wsdl:message>
+  <wsdl:message name="NySkjemabehandlingResponseMessage">
+    <wsdl:part name="parameters" element="skjb:NySkjemabehandlingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SkjemabehandlingPort">
+    <wsdl:operation name="NySkjemabehandling">
+      <wsdl:input name="NySkjemabehandlingRequest" message="skjb:NySkjemabehandlingMessage" />
+      <wsdl:fault name="SystemFault" message="skjb:SystemFaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SkjemabehandlingSoap" type="skjb:SkjemabehandlingPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NySkjemabehandling">
+      <soap:operation style="document" soapAction="http://skjema.kxml.no/sak/skjemabehandling-v2/#NySkjemabehandling" />
+      <wsdl:input name="NySkjemabehandlingRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:fault name="SystemFault">
+        <soap:fault use="literal" name="SystemFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Skjemabehandling">
+    <wsdl:port name="Skjemabehandling" binding="skjb:SkjemabehandlingSoap">
+      <soap:address location="http://skjema.kxml.no/sak/skjemabehandling-v2" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

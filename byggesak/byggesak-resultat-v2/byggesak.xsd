@@ -1,0 +1,1620 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" xmlns:bygningns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" xmlns:adressens="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" xmlns:personns="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" targetNamespace="http://www.be.no/xml/ns/byggesak/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/adresse" schemaLocation="matrikkel\adresse.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/bygning" schemaLocation="matrikkel\bygning.xsd"/>
+	<xs:import namespace="http://matrikkel.statkart.no/eksternapi/innsyn/v3/modell/person" schemaLocation="matrikkel\person.xsd"/>
+	<xs:element name="byggesak">
+		<xs:annotation>
+			<xs:documentation>Byggesak.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sak" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="typetiltak" type="be:TiltakType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Type tiltak.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="soknad" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Sakstype. </xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<!--							<xs:choice minOccurs="0">   -->
+										<xs:element ref="be:igangsettingstillatelse" minOccurs="0" maxOccurs="unbounded"/>
+										<xs:element ref="be:midlertidigbrukstillatelse" minOccurs="0" maxOccurs="unbounded"/>
+										<xs:element name="ferdigattest" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anmodning om ferdigattest.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="tilfredsstillerkravene" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Det bekreftes at byggverket tilfredsstiller kravene til ferdigattest.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="gjenstaendearbeider" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Følgende gjenstående arbeider av mindre vesentlig betydning vil bli utført innen 14 dager.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="fristgjenstaendearbeider" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Gjenstående arbeider utføres innen dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="bekreftelseinnendato" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Bekreftelse på at disse arbeidene er utført vil være kommunen i hende innen dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="foretattjusteringer" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Er det foretatt juseteringer i forhold til tillatelse som ikke er søknadspliktig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="sluttrapportavfalldato" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Sluttrapport for avfall vedlegges søknaden, dato.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="dokumentasjonoverlevert" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Det bekreftes at tilstrekkelig dokumentasjon som grunnlag for driftsfaser er overlevert byggverkets eier til å bli tatt i bruk.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<!--							</xs:choice>   -->
+										<xs:element name="endringavtillatelse" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Endring av tillatelse.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="endringansvarsrett" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endringer av ansvarsretter (ny ansvarsrett, skifte av ansvarsrett, avsluttet ansvarsrett)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringavansvarligsoker" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av ansvarlig søker, endring av tiltakshaver</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringdispensasjon" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av tiltak som krever en dispensasjon.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringareal" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av tiltak som medfører endring av areal.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringplassering" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av tiltak som medfører endring av plassering.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringformal" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av tiltak som medfører endring av formål.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringbruk" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Endring av tiltak som medfører endring av bruk.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="endringannet" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Annen endring.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Beskrivelse av andre endringer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="kommunenssaksnummer" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Kommunens saksnummer.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="matrikkelenhet" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Oppretting av matrikkelenhet.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="enheter" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Eksisterende enhet.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="enhet" type="be:EiendomType" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="endringer" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Endringer.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="endring" type="be:ParsellType" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="be:rammebetingelser" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="beskrivelseavtiltak" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Beskrivelse av tiltak.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="formal" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Formål.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="anleggstypekode" type="be:AnleggstypekodeType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Anleggstypekode.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="bygningstypekode" type="be:BygningstypekodeType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Bygningstypekode.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="neringsgruppekode" type="be:NeringsgruppekodeType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Næringsgruppe, kode for bruk.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="bolig" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Skal brukes som bolig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="fritidsbolig" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Skal brukes som bolig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="garasje" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Skal brukes som bolig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="annet" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Skal brukes som bolig.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Beskrivelse dersom bruk er 'annet'.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="folgesbrev" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Følgesbrev.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="bebyggelse" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Bebyggelse.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="arealdisponering" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Arealdisponering (datatyper fra Matrikkel).</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="tomteareal" minOccurs="0">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="byggeomrade" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Byggeområde/grunneiendom (Matrikkeldata).</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="arealsomtrekkesfra" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Evt. areal som trekkes fra i hht. beregningsregler.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="arealsomleggestil" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Evt. areal som legges til i hht. beregningsregler.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="beregnettomteareal" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Beregnet tomteareal.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="bebyggelsen" minOccurs="0">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="beregnetmaksimaltbyggeareal" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Beregnet maksimalt byggeareal i hht. plan.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="arealeksisterendebebyggelse" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Areal eksisterende bebyggelse (Matrikkeldata).</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="arealnybebyggelse" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Areal ny bebyggelse.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="parkeringsareal" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Parkeringsareal.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="sumareal" type="xs:double">
+																				<xs:annotation>
+																					<xs:documentation>Sum areal.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="beregnetgradavutnytting" type="xs:decimal" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Beregnet grad av utnytting.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="bebygdarealnybebyggelse" type="xs:double" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Bebygd area (BYA)l ny bebyggelse (Matrikkeldata).</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="bruksarealnybebyggelse" type="xs:double" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Bruksareal (BRA) ny bebyggelse (Matrikkeldata).</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="bygningsopplysninger" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="arealbya" type="be:ArealfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Areal BYA.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="arealboligbra" type="be:ArealfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Areal bolig BRA.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="arealannetbra" type="be:ArealfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Areal annet BRA.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="arealialtbra" type="be:ArealfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Areal ialt BRA.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="bruksenheterboligformal" type="be:EnheterfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Antall bruksenheter til boligformål.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="bruksenheterannetformal" type="be:EnheterfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Antall bruksenheter til annet formål.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="bruksenheterialt" type="be:EnheterfordelingType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Antall bruksenheter i alt.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="antalletasjer" type="xs:nonNegativeInteger" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Antall etasjer etter at tiltaket er gjennomført.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="lofteinnretninger" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="erheisibygning" type="be:ThreeStateType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Er det løfteinnretninger som omfattes av TEK i bygningen (Matrikkeldata)?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="planlegges" type="be:ThreeStateType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Søkes det om slik innretning installert?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="heiser" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Har bygningen heiser?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="trappeheisellerlofteplattform" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Har bygningen trappeheiser eller løfteplattformer?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="rulletrapperellerrullendefortau" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Har bygningen rulletrapper eler rullende fortau?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="plassering" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Plassering.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="konflikthoyspentkraftlinje" type="be:ThreeStateType" minOccurs="0"/>
+													<xs:element name="konfliktvannogavlop" type="be:ThreeStateType" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="infrastruktur" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Infrastruktur.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="adkomst" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Veg.</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="endretadkomst" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Gir tiltaket ny eller endret adkomst?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="veg" minOccurs="0" maxOccurs="unbounded">
+																	<xs:annotation>
+																		<xs:documentation>Tillatelse for avkjøring til vei.</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="vegtype" type="be:VegtypeType" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>Vegtype.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																			<xs:element name="ertillatelsegitt" type="xs:boolean" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>Er avkjøringstillatelse gitt for den spesifiserte vegtypen.</xs:documentation>
+																				</xs:annotation>
+																			</xs:element>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="vannforsyning" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Vannforsyning.</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="vannforsyningskode" type="bygningns:VannforsyningsKode" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Tilknytningstype (Matrikkeldata).</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="krysserannensgrunn" type="be:ThreeStateType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Dersom vannforsyning krysser annens grunn</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="tillatelseforkrysning" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Foreligger rettighet ved tinglyst erklæring?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="avlop" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Avløp.</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="tilknytningstype" type="be:AvlopTilknytningstypeType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Tilknytning i forhold til tomta.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="skalwcinstalleres" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Skal det installeres vannklosett.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="foreliggerutslippstillatelse" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Foreligger utslippstillatelse.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="krysserannensgrunn" type="be:ThreeStateType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Dersom avløpsanlegg krysser annens grunn</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="tillatelseforkrysning" type="xs:boolean" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Dersom ja, foreligger rettighet ved tinglyst erklæring?</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="overvann" type="be:OvervannType" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Takvann/overvann føres til.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="boligspesifikasjon" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Boligspesifikasjon.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="bruksenhet" type="bygningns:Bruksenhet" minOccurs="0"/>
+													<xs:element name="adresse" type="adressens:Vegadresse" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="energiforsyning" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Energiforsyning.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="relevant" type="xs:boolean" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Er energiforsyning relevant?</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="oppvarming" type="be:RomoppvarmingType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Romoppvarming.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="energikilde" type="be:EnergikildeType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Energikilde.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="be:dispensasjon" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Dispensasjoner.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element ref="be:eiendom" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="part" type="be:PartType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Part i saken.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="rolle" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Spesifiserer hvilke roller som inngår i saken, og hvilke parter som innehar disse rollene.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="type" type="be:PartRolleType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Angir hvilken type rolle parten har i saken.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="referansetilpart" type="be:PartRefType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Referanse til en part.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="referansetileiendom" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Referanse til eiendom (f.eks. når type=nabo).</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="ref" type="xs:IDREF" use="required"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="signert" type="xs:boolean" minOccurs="0"/>
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:ID" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ansvarsomradebeskrivelser" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Beskrivelser av ansvarsområder.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="beskrivelse" type="be:BeskrivelseAnsvarsomradeType" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="gjennomforingsplan" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Gjennomføringsplan.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="fagomrader" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Fagområder.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="prosjektering" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="omrade" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="utforelse" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="omrade" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="kontroll" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="omrade" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element ref="be:ansvarsfordeling" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Ansvarsfordeling.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element ref="be:samsvarserklering" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Samsvarsklæring.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element ref="be:kontrollerklering" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="bygning" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Bygning</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="refereanseeiendom" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Referanse til eiendommen hvor bygningen står. </xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="ref" type="xs:IDREF" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="andremyndigheter" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Andre myndigheter.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="be:arbeidstilsynet" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="vedlegg" type="be:VedleggType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Vedlegg til denne byggesaken.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="soknadstype" type="be:BSSoknadstypeType">
+							<xs:annotation>
+								<xs:documentation>Søknadstype.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="byggesaksid" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Byggesaks-id.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="soknadsid" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Søknads-id.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="saksbehandling" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="matrikkelenhet">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="rekvisisjon" type="xs:boolean">
+											<xs:annotation>
+												<xs:documentation>Rekvisisjon av oppmålingsforretning ved opprettelse eller endring av matrikkelenhet.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="utsettelse" type="xs:boolean">
+											<xs:annotation>
+												<xs:documentation>Utsettelse av oppmålingsforretning eller pbl § 21-9 siste ledd.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="soknadmatrikulering" type="xs:boolean">
+											<xs:annotation>
+												<xs:documentation>Søknad om matrikulering med utsattt oppmålingsforretning.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="onsketdato" type="xs:date">
+											<xs:annotation>
+												<xs:documentation>Ønsket dato for forretningen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="kommentarer" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Kommentarer.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="arkiv" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="identifier" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eiendom">
+		<xs:annotation>
+			<xs:documentation>Eiendom.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="person" type="personns:Person" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Person som eier eiendommen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="identifikasjon" type="be:EiendomsadresseType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Identifikasjon av eiendommen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="required"/>
+			<xs:attribute name="type" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="byggeeiendom"/>
+						<xs:enumeration value="naboeiendom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="arbeidstilsynet">
+		<xs:annotation>
+			<xs:documentation>Arbeidstilsynet.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="arbeidsplasser" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Arbeidsplasser.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="antalleksisterende" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Eksisterende arbeidsplasser.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antallframtidige" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall fremtidige arbeidsplasser.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antallfaste" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall faste arbeidsplasser.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antallmidlertidige" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall midlertidige arbeidsplasser.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antalltotalt" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall arbeidsplasser totalt.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="utleiebygg" type="xs:boolean" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Utleiebygg?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="beskrivelse" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Beskriv hvilken type arbeid og/eller prosesser.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dispensasjon">
+		<xs:annotation>
+			<xs:documentation>Dispensasjon</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dispensasjonstype" type="be:DispensasjonsType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Hva det søkes dispensasjon fra.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="begrunnelse" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Begrunnelse for søknaden.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="godkjenningsomrade">
+		<xs:annotation>
+			<xs:documentation>Godkjenningsområde</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="referanseforetak" type="be:PartRefType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Referanse til ansvarlig foretak.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="referansetolocal" minOccurs="0">
+					<xs:complexType>
+						<xs:attribute name="ref" type="xs:IDREF" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="funksjon" type="be:FunksjonsType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Funksjon i henhold til godkjenningsområder, valgt av ansvarlig søker.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="fagomrade" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Tiltakstype.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="tiltaksklasse" type="be:TiltaksklasseType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Tiltaksklasse.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="samsvarserklering">
+		<xs:annotation>
+			<xs:documentation>Samsvarserklæring.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="prosjektering" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Prosjektering.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:SamsvarserkleringType">
+								<xs:sequence>
+									<xs:element name="fagomrade" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Fagområde.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="prosjekteringverifisert" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Prosjektering verifisert i samsvar med TEK10 § 2-1/§ 2-2.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="grunnlagverifisert" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Prosjektering verifisert i samsvar med prosjekteringsgrunnlag TEK10 § 2-3.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ikkeavdekketgjenstaende" type="be:AnsvarsomradeType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Det er ikke avdekket gjenstående arbeider innenfor ansvarsområdet som er til hinder for å gi...?</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="utforelse" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Utførelse.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:SamsvarserkleringType">
+								<xs:sequence>
+									<xs:element name="fagomrade" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Fagområde.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="utforelseverifisert" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Utførelse verifisert i samsvar med produksjonsunderlag.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ingenmanglerbrukstillatelse" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Det er ikke avdekket feil eller mangler som hindrer midlertidig brukstillatelse.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="gjenstaendearbeider" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Angi gjenstående arbeider av mindre vesentlig betydning, innenfor den delen av tiltaket det søkes midlertidig brukstillatelse for.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="resterendedeler" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Angi resterende deler av tiltaket hvor det her ikke søkes om midlertidig brukstillatelse.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ingenmanglerferdigattest" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Sluttkontrollen har ikke avdekket feil eller mangler som hindrer ferdigattest.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="kontrollerklering">
+		<xs:annotation>
+			<xs:documentation>Kontrollerklæring.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="prosjektering" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Prosjektering.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:KontrollerkleringType">
+								<xs:sequence>
+									<xs:element name="fagomrade" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Fagområde.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="fagomradetkontrollert" type="be:AnsvarsomradeType" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Ansvarsområdet er ferdig kontrollert for...</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="arbeidansvarsrettavsluttet" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Arbeidet innenfor ansvarsretten er avsluttet.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="utforelse" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Utførelse.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:KontrollerkleringType">
+								<xs:sequence>
+									<xs:element name="fagomrade" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Fagområde.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ingenvesentligemanglerbrukstillatelse" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Sluttkontrollen har ikke avdekket feil eller mangler som hindrer midlertidig brukstillatelse.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="mindremangler" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Følgende mangler av mindre vesentlig betydning gjenstår. </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="ingenvesentligemanglerferdigattest" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Sluttkontrollen har ikke avdekket feil eller mangler som hindrer ferdigattest.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ansvarsfordeling">
+		<xs:annotation>
+			<xs:documentation>Kontrollplan.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ansvarligsoker" type="be:AnsvarligSokerType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Ansvarlig søker.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ansvarligprosjektering" type="be:AnsvarligProsjekteringType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Ansvarlig prosjektering.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ansvarligutforelse" type="be:AnsvarligUtforelseType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Ansvarlig utførelse.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ansvarligkontrollprosjektering" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Ansvarlig kontroll av prosjektering.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:AnsvarligKontrollType">
+								<xs:sequence>
+									<xs:element name="kontrollerkleringrammetillatelse" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Kontrollerklæring vil foreligge ved søknad om rammetillatelse.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="kontrollerkleringigangsettingstillatelse" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Kontrollerklæring vil foreligge ved søknad om ignangsettingstillatelse.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="kontrollerkleringferdigattest" type="xs:boolean" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Kontrollerklæring vil foreligge ved ferdigattest.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ansvarligkontrollutforelse" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Ansvarlig kontroll av uførelse.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="be:AnsvarligKontrollType"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="utforesved">
+		<xs:annotation>
+			<xs:documentation>Kontroll utføres ved.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="1a">
+					<xs:annotation>
+						<xs:documentation>Dokumentert egenkontroll ved operatør.</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="1b">
+					<xs:annotation>
+						<xs:documentation>Dokumentert egenkontroll ved sidemann.</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="1c">
+					<xs:annotation>
+						<xs:documentation>Dokumentert egenkontroll ved overordnet.</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="2">
+					<xs:annotation>
+						<xs:documentation>Uavhengig kontroll.</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ansvarsrett">
+		<xs:annotation>
+			<xs:documentation>Søknad om ansvarsrett.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="part" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="funksjon" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="kode" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="referansetilansvarligforetak" minOccurs="0">
+								<xs:complexType>
+									<xs:attribute name="ref" type="xs:IDREF" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="soknadendringtillatelse">
+		<xs:annotation>
+			<xs:documentation>Søknad om endring av tillatelse.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="beskrivelse" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Beskrivelse av endring.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="igangsettingstillatelse">
+		<xs:annotation>
+			<xs:documentation>Søknad om igangsettingstillatelse.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="gjelderheletiltaket" type="xs:boolean" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Gjelder søknaden om igangsettingstillatelse hele tiltaket?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="delsoknad" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Delsøknad.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="kommunenssaksnummer" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Kommunens saksnummer.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="delavtiltaket" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Hvilken del av tiltaket gjelder søknaden?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="tillatelsedato" type="xs:date" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Dato for gitt tillatelse.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="kommentar" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Kommentar.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lokalgodkjenning">
+		<xs:annotation>
+			<xs:documentation>Søknad om lokal godkjenning.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ertidligeregodkjent" type="xs:boolean" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Har det vært søkt om lokal godkjenning i kommunen tidligere?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="kommunesaksnummer" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Oppgi kommunens saksnummer.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="utdanningsniva" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Utdanningsnivå hos foretakets ledere, antall som har fag/svennebrev.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="grad" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Utdanningsgrad/type skole.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="fag/svennebrev"/>
+										<xs:enumeration value="mesterbrev/fagskole"/>
+										<xs:enumeration value="ingeniørhøgskole"/>
+										<xs:enumeration value="teknisk skole/universitet"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="antall" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall i foretaket med denne graden.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antallpraksisar" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall praksisår for ansatte med denne graden.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="beskrivelseavutdannelse" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Beskrivelse av utdannelse ved økt utdanning.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="personerifagligledelse" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Personer i faglig ledelse.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="system" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Foretaket har systemer i aktivt bruk som bla. omfatter ...</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="systemtype" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Systemtype.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="organisasjonsplan"/>
+										<xs:enumeration value="identifikasjon av ..."/>
+										<xs:enumeration value="system for ..."/>
+										<xs:enumeration value="styring av ..."/>
+										<xs:enumeration value="foretaket bruker system som ..."/>
+										<xs:enumeration value="planlegging ..."/>
+										<xs:enumeration value="regelmessig gjennomgang ..."/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="eribruk" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Er i systemet i bruk?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="referanseprosjekter" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Referanseprosjekter.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="tidligereinnsendt" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Har det tidligere vært innsendt oversikt.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="prosjekt" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Referanseprosjekt.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ansvarsomrader" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Beskrivelse av ansvarsområde.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="adresse" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Referanseprosjektets adresse.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="fagligleder" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Faglig leder for prosjektet.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="midlertidigbrukstillatelse">
+		<xs:annotation>
+			<xs:documentation>Anmoding om midlertidig brukstillatelse.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="datoferdigattest" type="xs:date" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Planlagt dato for søknad om ferdigattest.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="gjelderheletiltaket" type="xs:boolean" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Gjelder søknaden om midlertidig brukstillatelse hele tiltaket?</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="delsoknad" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Delsøknad.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="delavtiltaket" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Beskriv hvilken del av tiltaket det søkes om midlertidig brukstillatelse for.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="gjenstaendeinnenfor" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Angi gjenstående arbeider av mindre vesentlig betydning, innenfor den delen av tiltaket det søkes midlertidig brukstillatelse for</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="gjenstaendeutenfor" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Angi resterende deler av tiltaket hvor det her ikke søkes om midlertidig brukstillatelse.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="hartilstrekkeligsikkerhet" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Har tiltaket pr i dag tilstrekkelig sikkerhetsnivå til å tas i bruk?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="utfortinnen" type="xs:date" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Følgende arbeider vil bi utført innen dato.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="typearbeider" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Type arbeider.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bekreftelseinnen" type="xs:date" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Bekreftelse på at disse arbeidene er utført vil være kommunen i hende innen dato.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rammebetingelser">
+		<xs:annotation>
+			<xs:documentation>Tiltakets ytre rammer og bygningsspesifikasjon.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="generellevilkar" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Generelle vilkår.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="oppfyllesvilkar" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Oppfylles vilkårene for 3 ukers saksbehandling, jf. §21-7 annet ledd?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="berorertidligere1850" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Berører tiltaket bygg eller anlegg fra før 1850?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="sokesomfraviktek" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Vil det søkes om fravik fra TEK10 for eksisterende byggverk (pbl §31-2)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="forhandskonferanseavholdt" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Er forhåndskonferanse avholdt.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="palagtuavhengigkontroll" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Er det pålagt uavhengig kontroll i tiltaket.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="berorerarbeidsplasser" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Berører tiltaket eksisterende eller fremtidige arbeidsplasser?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="planstatus" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Reguleringsplan.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="plantype" type="be:PlantypeType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Plantype.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="navn" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Planens navn.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="formal" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Beskrivelse av reguleringsformål i arealdel av kommuneplan/reguleringsplan/bebyggelsesplan.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="andrerelevantekrav" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Andre relevante krav (kommunale vedtekter o.l.)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="beregningsregel" type="be:BeregningsregelType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Beregningsregel grad av utnytting iht. gjeldende plan.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="utnyttingsgrad" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Grad av utnytting iht. gjeldende plan.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:fractionDigits value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="kravtilbyggegrunn" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Grunnforhold, rasfare og miljøforhold.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="flomutsattomrade" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Plassering i flomutsatt område (TEK §7-2)?</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="skalplasseres" type="be:ThreeStateType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Skal byggverket plasseres i flomutsatt område (TEK §7-2)?</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="f1" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>F1 (liten konsekvens og sannsynlighet lavere enn 1/20 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="f2" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>F2 (middels konsekvens og sannsynlighet lavere enn 1/200 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="f3" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>F3 (stor konsekvens og sannsynlighet lavere enn 1/1000 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="skredutsattomrade" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Plassering i skredutsatt område (TEK§7-3)?</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="skalplasseres" type="be:ThreeStateType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Skal byggverket plasseres i skredutsatt område (TEK§7-3)?</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="s1" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>S1 (liten konsekvens og sannsynlighet lavere enn 1/100 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="s2" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>S2 (middels konsekvens og sannsynlighet lavere enn 1/1000 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="s3" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>S3 (stor konsekvens og sannsynlighet lavere enn 1/5000 år)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="miljoforhold" type="be:ThreeStateType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Foreligger det fare eller vesentlig ulempe som følge av andre natur- og miljøforhold (pbl §28-1)</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="varsling" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Varsling av naboer.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="fritattfranabovarsling" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Er tiltaket fritatt fra nabovarsling?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="foreliggermerknader" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Foreligger det merknader fra naboer eller gjenboere?</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="antallprotester" type="xs:nonNegativeInteger" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Antall protester som foreligger.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="vurderingavprotest" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Ansvarlig søkers vurdering av protest - fritekst.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="soknadseesfysiskadresse" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Adresse hvor søknaden kan sees.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="fysiskadresse" type="be:EnkelAdresseType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Søknaden kan sees på denne fysiske adressen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="kontaktperson" type="be:KontaktinformasjonType" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="soknadseespaurl" type="xs:anyURI" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Søknaden kan sees på denne URLen.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:attribute name="eier">
+		<xs:annotation>
+			<xs:documentation>Eier av id og status.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:attribute>
+</xs:schema>

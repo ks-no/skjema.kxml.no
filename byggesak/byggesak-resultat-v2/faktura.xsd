@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Thor Kristoffersen (Norwegian Computing Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:be="http://www.be.no/xml/ns/byggesak/2.0" targetNamespace="http://www.be.no/xml/ns/byggesak/2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xs:include schemaLocation="common.xsd"/>
+	<xs:simpleType name="AlphanumMixedType">
+		<xs:annotation>
+			<xs:documentation>Alfanumerisk, både store og små bokstaver, med påfølgende blanke.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\p{L}\p{Nd}]* *"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AlphanumUppercaseType">
+		<xs:annotation>
+			<xs:documentation>Alfanumerisk, kun store bokstaver, med påfølgende blanke.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\p{Lu}\p{Nd}]* *"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericBinaryType">
+		<xs:annotation>
+			<xs:documentation>Numerisk, binær, med ledende blanke.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=" *[01]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericDecimalType">
+		<xs:annotation>
+			<xs:documentation>Numerisk, desimal, med ledende blanke.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=" *[0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericMoneyType">
+		<xs:annotation>
+			<xs:documentation>Numerisk, to faste desimaler.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=" *[0-9]*[0-9]\.[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InfoOmForetakType">
+		<xs:annotation>
+			<xs:documentation>Informasjon om foretak.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="antallforetakfunnet" type="xs:nonNegativeInteger" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Antall foretak funnet.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="organisasjonsnummer" type="be:OrganisasjonsnummerType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Organisasjonsnummer i Enhetsregisteret.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="navn" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Navn på foretak.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="postadresse" type="be:EnkelAdresseType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Postadresse til foretak.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="godkjenttil" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Godkjent til.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="faktura">
+		<xs:annotation>
+			<xs:documentation>Faktura.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ordre">
+					<xs:annotation>
+						<xs:documentation>Ordre.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="accept_flag">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="allocation_key">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="amount_set">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_id">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="8"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="article">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="15"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="batch_id">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumMixedType">
+										<xs:length value="12"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="currency">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="disc_percent">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="17"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="exch_rate">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="17"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ext_ord_ref">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumMixedType">
+										<xs:length value="15"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="line_no">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="4"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="order_id">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="order_type">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="responsible">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="8"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="responsible2">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="8"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="sequence_no">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="8"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="trans_type">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="value_1">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="17"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="voucher_type">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="kunde">
+					<xs:annotation>
+						<xs:documentation>Kunde.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="full_record">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="change_status">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_gr_id">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_id">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_id_ref">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_name">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="apar_type">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="cash_delay">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="client">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="collect_flag">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="comp_reg_nr">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="25"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="control">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="credit_limit">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericMoneyType">
+										<xs:length value="20"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="currency_set">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ext_apar_ref">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="15"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="language">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="main_apa_id">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="9"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="pay_delay">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="pay_method">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="priority_no">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericDecimalType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="short_name">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="10"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="tax_set">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="terms_set">
+								<xs:simpleType>
+									<xs:restriction base="be:NumericBinaryType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="address">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="160"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="address_type">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="country_code">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="3"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="description">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="50"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="zip_code">
+								<xs:simpleType>
+									<xs:restriction base="be:AlphanumUppercaseType">
+										<xs:length value="15"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ordrerapport">
+					<xs:annotation>
+						<xs:documentation>Ordrerapport.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="heading">
+								<xs:annotation>
+									<xs:documentation>Heading.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="heading" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Statens bygningstekniske etat. TODO: hva er dette?</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="counter" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Overføringsliste for ordrefil nr 'counter'.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="no_of_trans_file" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Antall transaksjoner på filen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="order_no_from" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Ordrenummer fra.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="order_no_to" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Ordrenummer til.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="period" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Periode for innlesing.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="batch_id" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Buntnummer.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="file_size" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Filstørrelse.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="content">
+								<xs:annotation>
+									<xs:documentation>Content.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="order_id">
+											<xs:annotation>
+												<xs:documentation>Ordrenummer.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:NumericDecimalType">
+													<xs:length value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="trans_per_invoice" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Antall transaksjoner per faktura.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="kunderapport">
+					<xs:annotation>
+						<xs:documentation>Kunderapport.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="heading">
+								<xs:annotation>
+									<xs:documentation>Heading.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="heading" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Statens bygningstekniske etat. TODO: hva er dette?</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="counter" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Overføringsliste for ordrefil nr 'counter'.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="printed_date">
+											<xs:annotation>
+												<xs:documentation>Skrevet ut.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{2}\.[0-9]{2}\.[0-9]{4}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="no_enterprises" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Antall foretak.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="file_size" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Filstørrelse.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="content">
+								<xs:annotation>
+									<xs:documentation>Content.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="apar_id_ref">
+											<xs:annotation>
+												<xs:documentation>Kunde-ID.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:NumericDecimalType">
+													<xs:length value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="apar_name">
+											<xs:annotation>
+												<xs:documentation>Kundenavn.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:AlphanumMixedType">
+													<xs:length value="50"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="address">
+											<xs:annotation>
+												<xs:documentation>Adresse.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:AlphanumMixedType">
+													<xs:length value="160"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="zip_code">
+											<xs:annotation>
+												<xs:documentation>Postnummer.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:AlphanumMixedType">
+													<xs:length value="15"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="change_status">
+											<xs:annotation>
+												<xs:documentation>Status.</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="be:AlphanumUppercaseType">
+													<xs:length value="1"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="rapporter">
+		<xs:annotation>
+			<xs:documentation>Rapporter.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="faktura">
+				<xs:annotation>
+					<xs:documentation>Faktura.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="produsertdato" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Produsert dato.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ordre" type="xs:anyURI">
+							<xs:annotation>
+								<xs:documentation>Ordre.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="kunde" type="xs:anyURI">
+							<xs:annotation>
+								<xs:documentation>Kunde.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ordrerapport" type="xs:anyURI">
+							<xs:annotation>
+								<xs:documentation>Ordrerapport.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="kunderapport" type="xs:anyURI">
+							<xs:annotation>
+								<xs:documentation>Kunderapport.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="varselfornyelse">
+				<xs:annotation>
+					<xs:documentation>Varsel om fornyelse.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="utgarfradato" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Utgår fra dato.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="utgartildato" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Utgår til dato.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="informasjonomforetak" type="be:InfoOmForetakType">
+							<xs:annotation>
+								<xs:documentation>Informasjon om foretak.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="meldingutgattgodkjenning">
+				<xs:annotation>
+					<xs:documentation>Melding om utgått godkjenning.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="informasjonomforetak" type="be:InfoOmForetakType">
+							<xs:annotation>
+								<xs:documentation>Informasjon om foretak.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
